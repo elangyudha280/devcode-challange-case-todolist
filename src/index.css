@@ -1,3 +1,10 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+@layer components {
+ .main_template{
+   @apply relative  font-poppins w-full h-screen overflow-x-hidden overflow-y-auto bg-slate-200;
+ }
+}

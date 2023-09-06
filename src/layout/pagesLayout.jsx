@@ -9,7 +9,12 @@ const PagesLayout = ({title,children}) =>{
     
     return (
         <main className="main_template">
-
+            {
+                children
+            }
         </main>
     )
 }
+
+
+export default PagesLayout;
