@@ -19,4 +19,8 @@
  .btn_add_activity{
     @apply relative flex items-center gap-2 mt-[0.5em] justify-center rounded-md w-full px-2  transition-all duration-300 hover:opacity-[0.6] text-white bg-blue-navbar py-2.5  min-[260px]:px-4 min-[260px]:mt-0  min-[260px]:w-auto min-[260px]:rounded-[1.5em]  
  }
+
+ .body_homepage{
+    @apply w-full border-2 border-red-600 mt-[1.5em]
+ }
 }

@@ -20,6 +20,10 @@ const HomePage=  () =>{
                             <p className="">Tambah</p>
                     </button>
                 </header>
+                {/* body homepage */}
+                <section className="body_homepage">
+                    
+                </section>
             </div>
         </PagesLayout>
     )
