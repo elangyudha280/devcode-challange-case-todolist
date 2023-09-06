@@ -3,8 +3,11 @@ import React from "react";
 
 import PagesLayout from "../layout/pagesLayout";
 
+// import component 
+import { CardActivity } from "../component/card";
+
 // import icons
-import { BiPlus } from "react-icons/bi";
+import { BiPlus,BiTrash } from "react-icons/bi";
 
 const HomePage=  () =>{
     return (
@@ -22,7 +25,23 @@ const HomePage=  () =>{
                 </header>
                 {/* body homepage */}
                 <section className="body_homepage">
-                    
+                   <CardActivity/>
+                     <CardActivity/>
+                     <CardActivity/>
+                       <CardActivity/>
+                       <CardActivity/>
+                         <CardActivity/>
+                           <CardActivity/>
+                           <CardActivity/>
+                           <CardActivity/>
+                           <CardActivity/>
+                           <CardActivity/>
+                           <CardActivity/>
+                           <CardActivity/>
+                           <CardActivity/>
+                   
+                 
+                
                 </section>
             </div>
         </PagesLayout>

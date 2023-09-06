@@ -5,7 +5,7 @@
 
 @layer components {
  .main_template{
-   @apply relative  font-poppins w-full h-screen overflow-x-hidden overflow-y-auto bg-slate-200;
+   @apply relative  font-poppins w-full h-screen overflow-x-hidden overflow-y-auto bg-slate-200 pb-[1em];
  }
 
  .main_navbar{
@@ -21,6 +21,16 @@
  }
 
  .body_homepage{
-    @apply w-full border-2 border-red-600 mt-[1.5em]
+    @apply w-full  mt-[1.5em] grid grid-cols-1 min-[500px]:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4 auto-rows-auto
+ }
+ .card_activity{
+  @apply w-full  p-4 rounded-md bg-white shadow-md;
+ }
+
+ .title_card_activity{
+    @apply w-full h-[130px] text-[1.1em] overflow-x-hidden overflow-y-auto  font-semibold;
+ }
+ .footer_card_activity{
+    @apply w-full flex items-center mt-2;
  }
 }
