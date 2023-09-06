@@ -8,6 +8,11 @@ export default {
     extend: {
       fontFamily:{
         'poppins':["'Poppins'",'sans-serif']
+      },
+      colors:{
+        'blue':{
+          'navbar':'rgba(22, 171, 248,1)'
+        }
       }
     },
   },

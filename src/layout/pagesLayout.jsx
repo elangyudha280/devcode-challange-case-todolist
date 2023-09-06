@@ -1,5 +1,7 @@
 import React,{useEffect} from 'react'
 
+// import navbar
+import Navbar from '../component/navbar'
 
 const PagesLayout = ({title,children}) =>{
 
@@ -9,6 +11,8 @@ const PagesLayout = ({title,children}) =>{
     
     return (
         <main className="main_template">
+            {/* navbar */}
+            <Navbar/>
             {
                 children
             }

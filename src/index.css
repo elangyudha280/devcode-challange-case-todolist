@@ -7,4 +7,8 @@
  .main_template{
    @apply relative  font-poppins w-full h-screen overflow-x-hidden overflow-y-auto bg-slate-200;
  }
+
+ .main_navbar{
+    @apply relative w-full py-3 px-3 bg-blue-navbar;
+ }
 }
