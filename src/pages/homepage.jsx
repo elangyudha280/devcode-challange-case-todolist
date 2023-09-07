@@ -5,7 +5,7 @@ import PagesLayout from "../layout/pagesLayout";
 
 // import component 
 import { CardActivity } from "../component/card";
-
+import { EmptyActivity } from "../component/emptyComponent";
 // import icons
 import { BiPlus,BiTrash } from "react-icons/bi";
 
@@ -24,12 +24,13 @@ const HomePage=  () =>{
                     </button>
                 </header>
                 {/* body homepage */}
-                <section className="body_homepage">
+                {/* <section className="body_homepage">
                   
-                   
+                    
                  
                 
-                </section>
+                </section> */}
+                <EmptyActivity/>
             </div>
         </PagesLayout>
     )

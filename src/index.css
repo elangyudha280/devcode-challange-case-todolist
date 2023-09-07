@@ -5,7 +5,7 @@
 
 @layer components {
  .main_template{
-   @apply relative  font-poppins w-full h-screen overflow-x-hidden overflow-y-auto bg-slate-200 pb-[1em];
+   @apply relative  font-poppins w-full h-screen overflow-x-hidden overflow-y-auto bg-slate-50 pb-[1em];
  }
 
  .main_navbar{
