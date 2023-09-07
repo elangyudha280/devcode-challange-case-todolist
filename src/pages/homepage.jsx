@@ -1,5 +1,6 @@
 import React, { useEffect } from "react";
 
+import {shallow} from 'zustand/shallow'
 
 import PagesLayout from "../layout/pagesLayout";
 
@@ -9,7 +10,14 @@ import { EmptyActivity } from "../component/emptyComponent";
 // import icons
 import { BiPlus } from "react-icons/bi";
 
+// import store
+import useStoreActivity from "../store/storeActivity";
+
 const HomePage=  () =>{
+
+    // data activity
+    let [dataActivity,setDataActivity,checkDataChange,setCheckDataChange]  = useStoreActivity((state)=> [state.dataActivity,state.setDataActivity,state.checkDataChange,state.setCheckDataChange],shallow)
+ 
 
 
     useEffect(()=>{
@@ -21,7 +29,7 @@ const HomePage=  () =>{
             return Response.json()
         })
         .then(e =>{
-            console.log(e)
+            setDataActivity(e.data)
         })
         .catch(err =>{
             console.log(err)
@@ -29,7 +37,7 @@ const HomePage=  () =>{
         .finally(()=>{
             console.log('loading selesai')
         })
-    })
+    },[checkDataChange])
 
     return (
         <PagesLayout title='Homepage'>
@@ -39,19 +47,27 @@ const HomePage=  () =>{
                     <h2 className="font-bold text-[1.8em]">
                         Activity
                     </h2>
-                    <button className="btn_add_activity">
+                    <button onClick={setCheckDataChange} className="btn_add_activity">
                             <BiPlus className="text-[1.3em] font-bold" />
                             <p className="">Tambah</p>
                     </button>
                 </header>
                 {/* body homepage */}
-                {/* <section className="body_homepage">
-                  
-                    
-                 
-                
-                </section> */}
-                <EmptyActivity/>
+                {
+              
+                (dataActivity?.length < 1) ? <EmptyActivity/>
+                :
+                    <section className="body_homepage">
+                        {
+                            dataActivity?.map(el=>{
+                                return (
+                                    <CardActivity key={el.id} activity={el}/>
+                                )
+                            })
+                        }
+                    </section>
+                }
+              
             </div>
         </PagesLayout>
     )
