@@ -25,20 +25,7 @@ const HomePage=  () =>{
                 </header>
                 {/* body homepage */}
                 <section className="body_homepage">
-                   <CardActivity/>
-                     <CardActivity/>
-                     <CardActivity/>
-                       <CardActivity/>
-                       <CardActivity/>
-                         <CardActivity/>
-                           <CardActivity/>
-                           <CardActivity/>
-                           <CardActivity/>
-                           <CardActivity/>
-                           <CardActivity/>
-                           <CardActivity/>
-                           <CardActivity/>
-                           <CardActivity/>
+                  
                    
                  
                 
