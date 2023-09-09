@@ -78,10 +78,10 @@ const HomePage =  () =>{
             <div className="max-w-[1020px] px-2 mx-auto mt-[2em]">
                 {/* header home page */}
                 <header className="header_homepage flex flex-wrap justify-between items-center">
-                    <h2 className="font-bold text-[1.8em]">
+                    <h2 className="font-bold text-[1.8em]" data-cy="activity-title">
                         Activity
                     </h2>
-                    <button onClick={addData} className="btn_add_activity">
+                    <button onClick={addData} data-cy="activity-add-button" className="btn_add_activity">
                             <BiPlus className="text-[1.3em] font-bold" />
                             <p className="">Tambah</p>
                     </button>

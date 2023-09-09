@@ -37,7 +37,7 @@ const EmptyActivity = ()=>{
     }
 
     return (
-        <section onClick={addData}  className="empty_activity cursor-pointer relative w-full flex justify-center pt-5">
+        <section onClick={addData} data-cy="activity-empty-state" className="empty_activity cursor-pointer relative w-full flex justify-center pt-5">
                 <img src={iconEmptyActivity} className="mx-auto w-[900px]  h-[400px] object-contain  inline-block" alt=""  />
         </section>
     )

@@ -44,21 +44,21 @@ const ModalDeleteActivity = ()=>{
     }
 
     return (
-        <section className="modal_container"  onClick={closeModal}>
+        <section className="modal_container"   onClick={closeModal}>
           {
             !modalActivity?.successCondition ?
-             <div className="card_modal" onClick={(e)=>{e.stopPropagation()}}>
+             <div data-cy="modal-delete" className="card_modal" onClick={(e)=>{e.stopPropagation()}}>
                 <IoWarningOutline className="block mx-auto text-[5em] text-red-400"/>
 
-                <h2 className="text-center text-[0.9em] mt-5 font-medium">
+                <h2 data-cy="modal-delete-title" className="text-center text-[0.9em] mt-5 font-medium">
                 Apakah anda yakin menghapus Activity  "<span className="font-bold">{modalActivity?.data?.title}</span>"?
                 </h2>
 
                 <div className="flex justify-evenly mt-5 gap-x-5 gap-y-4">
-                        <button onClick={closeModal} className="btn_batal w-full bg-slate-300 text-slate-500 font-semibold rounded-[2em] py-3 flex-1">
+                        <button data-cy="modal-delete-cancel-button" onClick={closeModal} className="btn_batal w-full bg-slate-300 text-slate-500 font-semibold rounded-[2em] py-3 flex-1">
                             Batal
                         </button>
-                        <button onClick={DeleteDataActiviy} className="btn_delete bg-red-600 text-white font-semibold rounded-[2em] py-3 w-full flex-1">
+                        <button data-cy="modal-delete-confirm-button" onClick={DeleteDataActiviy} className="btn_delete bg-red-600 text-white font-semibold rounded-[2em] py-3 w-full flex-1">
                             Hapus
                         </button>
                 </div>
@@ -73,7 +73,7 @@ const ModalDeleteActivity = ()=>{
 
 const ModalSuccessDelete = ({title})=>{
     return (
-        <div className="card_modal flex flex-col items-center min-[300px]:items-stretch  min-[300px]:flex-row py-3 px-5 gap-2">
+        <div data-cy="modal-information" className="card_modal flex flex-col items-center min-[300px]:items-stretch  min-[300px]:flex-row py-3 px-5 gap-2">
             <FiAlertCircle className="text-green-600 text-[1.5em] inline-block"/>
             <p className="msg_success font-medium text-center min-[300px]:text-start flex-1 w-full">{title}</p>
         </div>

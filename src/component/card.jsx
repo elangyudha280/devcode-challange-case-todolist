@@ -41,14 +41,14 @@ const CardActivity = ({activity})=>{
 
     return (
         <div className="card_activity " >
-            <Link to={`/detail/${activity.id}`} className="title_card_activity">
+            <Link to={`/detail/${activity.id}`} data-cy="activity-item" className="title_card_activity">
                {activity.title}
             </Link>
             <div className="footer_card_activity">
-                <p className="date text-slate-500 text-[0.9em] flex-1 w-full">
+                <p data-cy="activity-item-date" className="date text-slate-500 text-[0.9em] flex-1 w-full">
                     {parsingDate(activity.created_at)}
                 </p>
-                <button onClick={openModal}  className="delete_activity z-[2]  text-slate-500 p-1 text-[1.1em] grid place-items-center">
+                <button onClick={openModal} data-cy="activity-item-delete-button" className="delete_activity z-[2]  text-slate-500 p-1 text-[1.1em] grid place-items-center">
                     <BiTrash/>
                 </button>
             </div>
