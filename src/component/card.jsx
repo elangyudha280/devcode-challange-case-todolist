@@ -11,6 +11,11 @@ import parsingDate from "../utils/parsingDate";
 
 // card activity
 const CardActivity = ({activity})=>{
+
+    // event open modal delete
+    const openModal = ()=>{
+        return
+    }
     return (
         <Link to={`/detail/${activity.id}`} className="card_activity " >
             <h2 className="title_card_activity">
