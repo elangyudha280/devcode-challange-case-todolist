@@ -46,7 +46,7 @@
 
 
 .header_detail_activity{
-   @apply relative w-full flex flex-col gap-1 md:flex-row;
+   @apply relative w-full flex flex-col gap-3 md:gap-1 md:flex-row;
 }
 
 .nav_item_add_todo{
