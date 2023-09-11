@@ -50,7 +50,7 @@
 }
 
 .nav_item_add_todo{
-   @apply flex justify-end md:justify-start items-center
+   @apply flex justify-end md:justify-start items-center gap-3
 }
 
 }
