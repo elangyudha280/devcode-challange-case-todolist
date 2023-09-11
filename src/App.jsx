@@ -6,6 +6,7 @@ import { Routes,Route } from 'react-router-dom'
 
 // import page componet
 import HomePage from './pages/homepage'
+import DetailPage from './pages/detailPage'
 
 function App() {
 
@@ -14,6 +15,8 @@ function App() {
       <Routes>
         {/* router home */}
         <Route path='/' element={<HomePage/>} />
+        {/* Router Detail activity */}
+        <Route path='/detail/:id' element={<DetailPage/>} />
       </Routes>
     </>
   )
