@@ -27,7 +27,7 @@ const DetailPage = ()=>{
                         <div className="flex-1 w-full ">
                             <div className="flex  items-center  h-full ">
                                 {/* title detail activity */}
-                                <h2 className="title_activty pr-3 flex-1  text-[1.4em]  font-semibold cursor-pointer md:text-[1.4em] md:flex-initial">
+                                <h2 className="title_activty pr-3 flex-1  text-[1.4em]  font-semibold cursor-pointer md:text-[1.5em] md:flex-initial">
                                     New Activity
                                 </h2>
                                 {/* input change detail activity */}
