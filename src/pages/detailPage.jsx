@@ -3,6 +3,10 @@ import React from "react";
 // import layout 
 import PagesLayout from "../layout/pagesLayout";
 
+// import store
+import useTodos from "../store/storeTodo";
+import shallow from 'zustand/shallow'
+
 // import icon
 import {IoIosArrowForward} from 'react-icons/io'
 import {TbPencil} from 'react-icons/tb'
@@ -12,9 +16,12 @@ import tableArrowsSort from '../assets/images/tabler_arrows-sort.svg'
 import { Link } from "react-router-dom";
 
 const DetailPage = ()=>{
+
+    // import store
+    const  [checkEditTitle,setEditTitle,setDataEditTitle] = useTodos((state)=>[state.checkEditTitle,state.setEditTitle,state.setDataEditTitle])
     return (
-        <PagesLayout title="detailActivity" >
-            <section className="max-w-[1020px] px-2 mx-auto mt-[2em] ">
+        <PagesLayout title="detailActivity" page="detail">
+            <section className="max-w-[1020px] px-2 mx-auto mt-[2em]"  onClick={()=>{console.log('oke')}}>
                 {/* header Detail Activty */}
                 <header className="header_detail_activity">
                     {/* icon nav */}
@@ -31,7 +38,7 @@ const DetailPage = ()=>{
                                     New Activity
                                 </h2>
                                 {/* input change detail activity */}
-                                {/* <input type="text" className=" flex-1 w-full py-1 bg-transparent text-semibold outline-none border-b-[1px] border-b-slate-200 text-[1.3em] md:text-[1.4em]" /> */}
+                                {/* <input type="text" className=" flex-1 w-full py-1 bg-transparent text-semibold outline-none border-b-[1px] border-b-slate-200 text-[1.3em] md:text-[1.5em]" /> */}
                                 <button className="py-1">
                                     <TbPencil className="text-[1.5em] text-slate-400 font-medium"/>
                                 </button>

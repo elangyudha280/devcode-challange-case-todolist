@@ -3,20 +3,33 @@ import React,{useEffect} from 'react'
 // import navbar
 import Navbar from '../component/navbar'
 
-const PagesLayout = ({title,children}) =>{
+const PagesLayout = ({title,page,onClick,children}) =>{
 
     useEffect(()=>{
         document.title = title
     },[])
     
     return (
-        <main className="main_template">
-            {/* navbar */}
-            <Navbar/>
+        <>
             {
-                children
+                page === 'detail' ? 
+                <main className="main_template" onClick={()=>{console.log('ok')}}>
+                    {/* navbar */}
+                    <Navbar/>
+                    {
+                        children
+                    }
+                </main>
+                :
+                <main className="main_template">
+                    {/* navbar */}
+                    <Navbar/>
+                    {
+                        children
+                    }
+                </main>
             }
-        </main>
+        </>
     )
 }
 
