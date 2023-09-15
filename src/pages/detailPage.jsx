@@ -5,7 +5,7 @@ import PagesLayout from "../layout/pagesLayout";
 
 // import store
 import useTodos from "../store/storeTodo";
-import shallow from 'zustand/shallow'
+import {shallow} from 'zustand/shallow'
 
 // import icon
 import {IoIosArrowForward} from 'react-icons/io'
@@ -21,15 +21,36 @@ const DetailPage = ()=>{
     const {id} = useParams()
 
     // import store
-    const  [checkEditTitle,setEditTitle,setDataEditTitle] = useTodos((state)=>[state.checkEditTitle,state.setEditTitle,state.setDataEditTitle])
+    const  [checkEditTitle,setEditTitle,setDataEditTitle,setStoreTitleActivity] = useTodos((state)=>[state.checkEditTitle,state.setEditTitle,state.setDataEditTitle,state.setTitleActivity],shallow)
    
     // state TITLE activity
-    const [titleActivity,setTitleActivity] = useState('New Activity')
+    const [titleActivity,setTitleActivity] = useState('')
 
 
 
     // get data detail actiivty
     useEffect(()=>{
+        // let raw = {
+        //     title:titleActivity
+        // }
+        // let requestOptions = {
+        // method: 'PATCH',
+        // headers:{
+        //     'Content-Type': 'application/json'
+        // },
+        // body: JSON.stringify(raw),
+        // redirect: 'follow'
+        // };
+
+        fetch(`https://todo.api.devcode.gethired.id/activity-groups/${id}`)
+        .then(response => {
+            if(!response.ok){
+                throw new Error('gagal mengambil data')
+            }
+            return response.json()
+        })
+        .then(result => setTitleActivity(result.title))
+        .catch(error => '')
     },[])
 
     // close mode edit title
@@ -37,8 +58,8 @@ const DetailPage = ()=>{
         // jika sedang berada di mode edit maka set data detail activity
         if(checkEditTitle){
             setDataEditTitle()
-            console.log('cllose')
-            return
+            setStoreTitleActivity(titleActivity,id)
+        return
         }
         return
     }
@@ -49,13 +70,22 @@ const DetailPage = ()=>{
         // jika sedang berada di mode edit maka ketika close ngirim data
         if(checkEditTitle){
             setDataEditTitle()
-            console.log('post data')
+            // tutup mode edit
+            closeModeEdit()
             return 
         }        
         
-        // set mode edit
+        // set mode edit title
         setEditTitle()
-        console.log('mode edit')
+    }
+
+    // set title 
+    let setTitle = (e)=>{
+        if(e.target.value.length < 1){
+            setTitleActivity('New Activity')
+            return
+        }
+        setTitleActivity(e.target.value)
     }
 
     return (
@@ -65,6 +95,7 @@ const DetailPage = ()=>{
                 <header className="header_detail_activity">
                     {/* icon nav */}
                     <div className="flex-1 flex w-full border-b-[1px] border-b-slate-200 py-2 md:border-0 md:py-0">
+                        {/* nav to home */}
                         <Link to={'/'} className="self-center">
                             <IoIosArrowForward className=" inline-block text-[2em]  font-semibold  rotate-[-180deg] md:text-[2.8em]"/>
                         </Link>
@@ -75,16 +106,19 @@ const DetailPage = ()=>{
                                 {
                                     (checkEditTitle) ? 
                                    (
-                                     <input type="text" autoFocus={true} className=" flex-1 w-full py-1 bg-transparent text-semibold outline-none text-[1.3em] md:border-b-[1px] md:border-b-slate-200  md:text-[1.5em]" />
+                                    // input edit title activity
+                                     <input type="text" onChange={setTitle} defaultValue={titleActivity} autoFocus={true} className=" flex-1 w-full  bg-transparent font-semibold outline-none text-[1.3em] md:border-b-[1px] md:border-b-slate-200  md:text-[1.5em]" />
                                     )
                                     :
                                     (
-                                        <h2 onClick={modeEdit} className="title_activty pr-3 flex-1 border-2  text-[1.4em]  font-semibold cursor-pointer md:text-[1.5em] md:flex-initial">
-                                            New Activity
+                                        // current title activity
+                                        <h2 onClick={modeEdit} className="title_activty pr-3 flex-1   text-[1.4em]  font-semibold cursor-pointer md:text-[1.5em] md:flex-initial">
+                                            {titleActivity}
                                         </h2>
                                     )
                                 }
-                                <button className="py-1 border-2" onClick={modeEdit}>
+                                {/* edit title activity */}
+                                <button className="py-1 " onClick={modeEdit}>
                                     <TbPencil className="text-[1.5em] text-slate-400 font-medium"/>
                                 </button>
                             </div>
@@ -105,6 +139,8 @@ const DetailPage = ()=>{
                         </button>
                     </div>
                 </header>
+
+                
             </section>
         </PagesLayout>
     )
