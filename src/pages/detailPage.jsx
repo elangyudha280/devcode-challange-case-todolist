@@ -96,7 +96,7 @@ const DetailPage = ()=>{
                     {/* icon nav */}
                     <div className="flex-1 flex w-full border-b-[1px] border-b-slate-200 py-2 md:border-0 md:py-0">
                         {/* nav to home */}
-                        <Link to={'/'} className="self-center">
+                        <Link to={'/'} data-cy="todo-back-button" className="self-center">
                             <IoIosArrowForward className=" inline-block text-[2em]  font-semibold  rotate-[-180deg] md:text-[2.8em]"/>
                         </Link>
 
@@ -112,13 +112,13 @@ const DetailPage = ()=>{
                                     :
                                     (
                                         // current title activity
-                                        <h2 onClick={modeEdit} className="title_activty pr-3 flex-1   text-[1.4em]  font-semibold cursor-pointer md:text-[1.5em] md:flex-initial">
+                                        <h2 onClick={modeEdit} data-cy="todo-title" className="title_activty pr-3 flex-1   text-[1.4em]  font-semibold cursor-pointer md:text-[1.5em] md:flex-initial">
                                             {titleActivity}
                                         </h2>
                                     )
                                 }
                                 {/* edit title activity */}
-                                <button className="py-1 " onClick={modeEdit}>
+                                <button className="py-1 " data-cy="todo-title-edit-button" onClick={modeEdit}>
                                     <TbPencil className="text-[1.5em] text-slate-400 font-medium"/>
                                 </button>
                             </div>
@@ -128,12 +128,12 @@ const DetailPage = ()=>{
                     {/* action nav add todo */}
                     <div className="nav_item_add_todo">
                         {/* button devide sort todo */}
-                        <button className="btn_sort_todo h-[40px] w-[40px] rounded-full bg-slate-100 border-[1px] border-slate-300 grid place-items-center md:h-[45px] md:w-[45px]" >
+                        <button data-cy="todo-sort-button" className="btn_sort_todo h-[40px] w-[40px] rounded-full bg-slate-100 border-[1px] border-slate-300 grid place-items-center md:h-[45px] md:w-[45px]" >
                             <img src={tableArrowsSort} className="object-center " alt="" />
                         </button>
 
                         {/* button add todo */}
-                        <button className="relative flex items-center gap-[2px] h-[40px]  justify-center rounded-full w-auto px-3  transition-all duration-300 hover:opacity-[0.6] text-white bg-blue-navbar py-2.5 md:h-[45px]">
+                        <button data-cy="todo-add-button" className="relative flex items-center gap-[2px] h-[40px]  justify-center rounded-full w-auto px-3  transition-all duration-300 hover:opacity-[0.6] text-white bg-blue-navbar py-2.5 md:h-[45px]">
                             <BiPlus className="text-[0.9em] md:text-[1em] font-bold" />
                             <p className="text-[0.9em] md:text-[1em] font-semibold">Tambah</p>
                         </button>
