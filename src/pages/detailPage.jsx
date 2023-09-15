@@ -3,6 +3,9 @@ import React,{useEffect, useState} from "react";
 // import layout 
 import PagesLayout from "../layout/pagesLayout";
 
+// import component
+import { EmptyTodo } from "../component/emptyComponent";
+
 // import store
 import useTodos from "../store/storeTodo";
 import {shallow} from 'zustand/shallow'
@@ -12,6 +15,7 @@ import {IoIosArrowForward} from 'react-icons/io'
 import {TbPencil} from 'react-icons/tb'
 import { BiPlus } from "react-icons/bi";
 import tableArrowsSort from '../assets/images/tabler_arrows-sort.svg'
+
 
 import { Link,useParams } from "react-router-dom";
 
@@ -102,7 +106,7 @@ const DetailPage = ()=>{
 
                         {/* title activty */}
                         <div className="flex-1 w-full ">
-                            <div className="flex  items-center  h-full ">
+                            <div className="flex flex-wrap items-center  h-full ">
                                 {
                                     (checkEditTitle) ? 
                                    (
@@ -112,7 +116,9 @@ const DetailPage = ()=>{
                                     :
                                     (
                                         // current title activity
-                                        <h2 onClick={modeEdit} data-cy="todo-title" className="title_activty pr-3 flex-1   text-[1.4em]  font-semibold cursor-pointer md:text-[1.5em] md:flex-initial">
+                                        <h2 onClick={modeEdit} data-cy="todo-title" className={`
+                                        title_activty pr-3 flex-1 text-[1.4em]  font-semibold cursor-pointer md:text-[1.5em] md:flex-initial w-[90px] md:w-[90%] lg:w-auto  truncate
+                                        `}>
                                             {titleActivity}
                                         </h2>
                                     )
@@ -140,6 +146,9 @@ const DetailPage = ()=>{
                     </div>
                 </header>
 
+                {/* body content todo item */}
+                {/* empty todo */}
+                <EmptyTodo/>
                 
             </section>
         </PagesLayout>

@@ -2,9 +2,10 @@ import React from "react";
 
 // import images
 import iconEmptyActivity from '../assets/images/activity-empty-state.png'
+import  emptyTodoImg from '../assets/images/todo-empty-state.svg'
 
 // import function post data activity
-import addDataActivity from "../utils/activity";
+// import addDataActivity from "../utils/activity";
 
 // import store
 import useStoreActivity from "../store/storeActivity";
@@ -43,4 +44,13 @@ const EmptyActivity = ()=>{
     )
 }
 
-export {EmptyActivity}
+// empty todo
+const EmptyTodo = ()=>{
+    return (
+        <section data-cy="todo-empty-state" className="todo_empty_state  mt-3 cursor-pointer relative w-full flex justify-center pt-5">
+            <img src={emptyTodoImg} className="mx-auto w-[900px]  h-[400px] object-contain  inline-block" alt="empty_todo_img"  />
+        </section>
+    )
+}
+
+export {EmptyActivity,EmptyTodo}
