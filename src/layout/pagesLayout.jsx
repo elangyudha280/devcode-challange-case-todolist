@@ -13,7 +13,7 @@ const PagesLayout = ({title,page,onClick,children}) =>{
         <>
             {
                 page === 'detail' ? 
-                <main className="main_template" onClick={()=>{console.log('ok')}}>
+                <main className="main_template" onClick={onClick}>
                     {/* navbar */}
                     <Navbar/>
                     {

@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect, useState} from "react";
 
 // import layout 
 import PagesLayout from "../layout/pagesLayout";
@@ -13,15 +13,54 @@ import {TbPencil} from 'react-icons/tb'
 import { BiPlus } from "react-icons/bi";
 import tableArrowsSort from '../assets/images/tabler_arrows-sort.svg'
 
-import { Link } from "react-router-dom";
+import { Link,useParams } from "react-router-dom";
 
 const DetailPage = ()=>{
 
+    // GET PARAMS
+    const {id} = useParams()
+
     // import store
     const  [checkEditTitle,setEditTitle,setDataEditTitle] = useTodos((state)=>[state.checkEditTitle,state.setEditTitle,state.setDataEditTitle])
+   
+    // state TITLE activity
+    const [titleActivity,setTitleActivity] = useState('New Activity')
+
+
+
+    // get data detail actiivty
+    useEffect(()=>{
+    },[])
+
+    // close mode edit title
+    const closeModeEdit = () =>{
+        // jika sedang berada di mode edit maka set data detail activity
+        if(checkEditTitle){
+            setDataEditTitle()
+            console.log('cllose')
+            return
+        }
+        return
+    }
+
+    // event mode edit
+    const modeEdit = (event)=>{
+        event.stopPropagation()
+        // jika sedang berada di mode edit maka ketika close ngirim data
+        if(checkEditTitle){
+            setDataEditTitle()
+            console.log('post data')
+            return 
+        }        
+        
+        // set mode edit
+        setEditTitle()
+        console.log('mode edit')
+    }
+
     return (
-        <PagesLayout title="detailActivity" page="detail">
-            <section className="max-w-[1020px] px-2 mx-auto mt-[2em]"  onClick={()=>{console.log('oke')}}>
+        <PagesLayout title="detailActivity" page="detail" onClick={closeModeEdit}>
+            <section className="max-w-[1020px] px-2 mx-auto mt-[2em]"  >
                 {/* header Detail Activty */}
                 <header className="header_detail_activity">
                     {/* icon nav */}
@@ -33,13 +72,19 @@ const DetailPage = ()=>{
                         {/* title activty */}
                         <div className="flex-1 w-full ">
                             <div className="flex  items-center  h-full ">
-                                {/* title detail activity */}
-                                <h2 className="title_activty pr-3 flex-1  text-[1.4em]  font-semibold cursor-pointer md:text-[1.5em] md:flex-initial">
-                                    New Activity
-                                </h2>
-                                {/* input change detail activity */}
-                                {/* <input type="text" className=" flex-1 w-full py-1 bg-transparent text-semibold outline-none border-b-[1px] border-b-slate-200 text-[1.3em] md:text-[1.5em]" /> */}
-                                <button className="py-1">
+                                {
+                                    (checkEditTitle) ? 
+                                   (
+                                     <input type="text" autoFocus={true} className=" flex-1 w-full py-1 bg-transparent text-semibold outline-none text-[1.3em] md:border-b-[1px] md:border-b-slate-200  md:text-[1.5em]" />
+                                    )
+                                    :
+                                    (
+                                        <h2 onClick={modeEdit} className="title_activty pr-3 flex-1 border-2  text-[1.4em]  font-semibold cursor-pointer md:text-[1.5em] md:flex-initial">
+                                            New Activity
+                                        </h2>
+                                    )
+                                }
+                                <button className="py-1 border-2" onClick={modeEdit}>
                                     <TbPencil className="text-[1.5em] text-slate-400 font-medium"/>
                                 </button>
                             </div>
