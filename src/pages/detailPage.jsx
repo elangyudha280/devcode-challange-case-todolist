@@ -5,6 +5,7 @@ import PagesLayout from "../layout/pagesLayout";
 
 // import component
 import { EmptyTodo } from "../component/emptyComponent";
+import { ModalAddTodoList } from "../component/modal";
 
 // import store
 import useTodos from "../store/storeTodo";
@@ -94,6 +95,7 @@ const DetailPage = ()=>{
 
     return (
         <PagesLayout title="detailActivity" page="detail" onClick={closeModeEdit}>
+            <ModalAddTodoList/>
             <section className="max-w-[1020px] px-2 mx-auto mt-[2em]"  >
                 {/* header Detail Activty */}
                 <header className="header_detail_activity">

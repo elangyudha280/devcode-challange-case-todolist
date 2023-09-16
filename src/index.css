@@ -53,4 +53,20 @@
    @apply flex justify-end md:justify-start items-center gap-3
 }
 
+.card_modal_todolist{
+   @apply bg-white rounded-md  w-[650px] relative;
+}
+.input-group{
+   @apply relative w-full flex flex-col gap-2
+}
+.dropdown_current{
+   @apply w-full h-[45px] flex items-center gap-2 px-2 rounded-md bg-slate-100 border-[1px]
+}
+.dropdown_devide{
+   @apply absolute top-[90%]  w-full flex flex-col bg-white   rounded-b-md  border-[1px]
+}
+.dropdown_item{
+   @apply w-full flex items-center gap-2 transition-all duration-200 px-2 py-3  border-b-[1px] hover:bg-blue-navbar hover:text-white
+}
+
 }

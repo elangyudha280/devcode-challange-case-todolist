@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { shallow } from "zustand/shallow";
 
@@ -8,7 +8,13 @@ import useStoreActivity from "../store/storeActivity";
 // ImWarning
 import { IoWarningOutline } from "react-icons/io5";
 import {FiAlertCircle}from "react-icons/fi"
+import {GrFormClose} from "react-icons/gr"
+import {RiArrowDropDownLine} from "react-icons/ri"
+import IconCheck from '../assets/images/icon_sort_active.svg'
 
+
+// utils
+import dataDropdownPriority from "../utils/dataDropdownPrority";
 
 // modal delete activity
 const ModalDeleteActivity = ()=>{
@@ -82,11 +88,116 @@ const ModalSuccessDelete = ({title})=>{
 
 // model add todo list
 const ModalAddTodoList = ()=>{
+
+    // state input todo
+    let [inputTodo,setInputTodo] = useState('')
+    // state open dropdown
+    let [openDropdown,setOpenDropdown] = useState(false)
+    // current priority
+    let [currentPriority,setCurrentPriority] = useState(null)
+
+  
+    // event set priority
+    const EventSetPriority = (priority,event)=>{
+       setCurrentPriority(priority)
+       setOpenDropdown(false)
+    }
+
     return (
-        <section className="modal_container"></section>
+        <section className="modal_container overflow-y-auto overflow-x-hidden pb-[5em]">
+
+                {/* card modal  */}
+                <div className="card_modal_todolist  ">
+                    {/* header modal */}
+                    <div className="header_modal_todolist relative flex items-center w-full p-4 border-b-[1px] " >
+                        <p className="font-medium flex-1 w-full text-[1.2em] text-slate-950">Tambah List Item</p>
+                        <button className="p-1 text-[1.5em] h-full"> 
+                            <GrFormClose/>
+                        </button>
+                    </div>
+
+                    {/* body modal */}
+                    <form action="">
+                        <div className="body_modal relative w-full  ">
+                                {/* modal input data*/}
+                                <div className="w-full py-5 px-4 border-b-[1px] ">
+                                    {/* input todolist */}
+                                    <div className="input-group">
+                                        <label htmlFor="input_todo" className="inline-block w-full font-semibold text-[0.8em]">Nama ListItem</label>
+                                    <input onChange={(e)=>{setInputTodo(e.target.value)}} type="text" autoFocus placeholder="Tambahkan Nama List Item" className="w-full py-3 rounded-md px-3 border-2 text-slate-400 outline-none focus:text-black transition-all duration-100 focus:border-blue-500" />
+                                    </div>
+
+                                    {/* input priority */}
+                                    <div className="input-group mt-3">
+                                        <label htmlFor="input_todo" className="inline-block w-full font-semibold text-[0.8em]">Priority</label>
+
+                                        {/* // dropdown current */}
+                                        <div className=" relative rounded-md w-[160px] z-[4]">
+                                            <button type="button" onClick={()=>{
+                                                setOpenDropdown((!openDropdown ? true : false))
+                                            }
+                                                } 
+                                                className="dropdown_current">
+                                                {
+                                                    currentPriority === null ?
+                                                    (
+                                                        <>
+                                                        <p className=" text-[0.9em] flex-1 w-full text-left">Pilih Priority</p>
+                                                        <RiArrowDropDownLine className="text-[1.5em] transition-all duration-100"/>
+                                                        </>
+                                                    )
+                                                    :
+                                                    (
+                                                        <>
+                                                        <div className={`icon_dropdown w-[10px] h-[10px] ${currentPriority?.color} rounded-full`}></div>
+                                                            <p className=" text-[0.9em] flex-1 w-full text-left">{currentPriority?.title}</p>
+                                                        <RiArrowDropDownLine className="text-[1.5em] transition-all duration-100"/>
+                                                        </>
+                                                    )
+                                                }
+                                            </button>
+                                            <div className={`
+                                                dropdown_devide
+                                                overflow-hidden
+                                                 ${!openDropdown ? 'h-[0px] border-[0px]' : 'h-auto border-[1px]'}
+                                              `}>
+                                              {
+                                                    dataDropdownPriority?.map(el =>{
+                                                        return (
+                                                            <button key={el.id} onClick={EventSetPriority.bind(this,el)} type="button"  className={`
+                                                            dropdown_item
+                                                            ${(el.id === currentPriority?.id) && 'bg-blue-navbar  text-white'}
+                                                            `}>
+                                                                <div className={`icon_dropdown w-[10px] h-[10px] rounded-full ${el.color}`}></div>
+                                                                <p className=" text-[0.9em] flex-1 w-full text-left capitalize">{el.title}</p>
+                                                                {(el.id === currentPriority?.id) &&<img src={IconCheck} alt="" className="object-center" />}  
+                                                            </button>
+                                                        )
+                                                    })
+                                              } 
+                                            </div>
+                                        </div>
+                                
+                                    </div>
+                                </div>
+
+                                {/* modal submit data */}
+                                <div className="flex w-full py-5 justify-end items-center px-4">
+                                    <button type="submit" disabled={
+                                        (inputTodo === '' || currentPriority === null) ? true : false
+                                         } className={`btn_sumbit_todo px-6 py-3 bg-blue-navbar rounded-full text-white
+                                         ${(inputTodo === '' || currentPriority === null) && 'opacity-[0.7]' }
+                                         `}>
+                                        Submit
+                                    </button>
+                                </div>
+                        </div>
+                    </form>
+                </div>
+        </section>
     )
 }
 
 
 
-export {ModalDeleteActivity}
+export {ModalDeleteActivity,ModalAddTodoList}
