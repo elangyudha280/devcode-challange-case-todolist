@@ -70,7 +70,7 @@ const ModalDeleteActivity = ()=>{
     )
 }
 
-
+// modal success delete activity
 const ModalSuccessDelete = ({title})=>{
     return (
         <div data-cy="modal-information" className="card_modal flex flex-col items-center min-[300px]:items-stretch  min-[300px]:flex-row py-3 px-5 gap-2">
@@ -79,5 +79,14 @@ const ModalSuccessDelete = ({title})=>{
         </div>
     )
 }
+
+// model add todo list
+const ModalAddTodoList = ()=>{
+    return (
+        <section className="modal_container"></section>
+    )
+}
+
+
 
 export {ModalDeleteActivity}

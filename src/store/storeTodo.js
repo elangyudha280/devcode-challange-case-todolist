@@ -4,6 +4,8 @@ import { create } from "zustand";
 // store todo
 const useTodos = create((set) =>({
     checkEditTitle:false,
+    // property untuk show modal add todolist
+    showModalAddTodoList:false,
     // method mode edit
     setEditTitle: ()=>{
         set(state =>{
