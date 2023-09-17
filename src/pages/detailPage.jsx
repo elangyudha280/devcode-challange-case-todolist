@@ -6,7 +6,7 @@ import PagesLayout from "../layout/pagesLayout";
 // import component
 import { EmptyTodo } from "../component/emptyComponent";
 import { ModalAddTodoList } from "../component/modal";
-
+import { CardTodoItem } from "../component/card";
 // import store
 import useTodos from "../store/storeTodo";
 import {shallow} from 'zustand/shallow'
@@ -152,7 +152,12 @@ const DetailPage = ()=>{
 
                 {/* body content todo item */}
                 {/* empty todo */}
-                <EmptyTodo/>
+                {/* <EmptyTodo/> */}
+
+                {/* todo container */}
+                <section className="todo_container">
+                    <CardTodoItem/>
+                </section>
                 
             </section>
         </PagesLayout>

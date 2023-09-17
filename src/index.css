@@ -56,6 +56,11 @@
 .card_modal_todolist{
    @apply bg-white rounded-md  w-[650px] relative;
 }
+
+.card_todo_item{
+   @apply relative w-full flex items-center bg-white  p-6 gap-4 shadow-md rounded-md bg-white ; 
+}
+
 .input-group{
    @apply relative w-full flex flex-col gap-2
 }
@@ -67,6 +72,10 @@
 }
 .dropdown_item{
    @apply w-full flex items-center gap-2 transition-all duration-200 px-2 py-3  border-b-[1px] hover:bg-blue-navbar hover:text-white
+}
+
+.todo_container{
+   @apply relative w-full mt-9;
 }
 
 }

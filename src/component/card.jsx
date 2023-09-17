@@ -6,7 +6,7 @@ import useStoreActivity from "../store/storeActivity";
 
 // import icon 
 import { BiTrash } from "react-icons/bi";
-
+import {TbTrash,TbPencil} from "react-icons/tb"
 // import router
 import { Link } from "react-router-dom";
 
@@ -58,7 +58,34 @@ const CardActivity = ({activity})=>{
 
 // card todo item
 const CardTodoItem = ()=>{
-    return 
+    return (
+        <div className="card_todo_item">
+            
+            {/* check todo*/}
+            <div className="flex gap-4 items-center">
+            {/* input check todo */}
+            <input type="checkbox" className="w-[20px] outline-none  h-[20px]" />
+             
+            {/* icon priority */}
+            <div className={`icon_dropdown w-[12px] h-[12px] rounded-full bg-orange-500`}></div>
+            </div>
+
+            {/* title todo */}
+            <h2 className="font-medium ">todolist</h2>
+
+            {/* button edit todo */}
+            <button className="text-[1.4em] text-slate-400">
+                <TbPencil/>
+            </button>
+
+            {/* BUTTON DELETE */}
+            <div className="flex-1 w-full flex justify-end items-center">
+                    <button className="text-slate-400 grid place-items-center text-[1.4em]">
+                        <TbTrash/>
+                    </button>
+            </div>
+        </div>
+    )
 }
 
 export {CardActivity,CardTodoItem}
