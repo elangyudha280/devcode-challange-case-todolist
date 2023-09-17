@@ -3,6 +3,7 @@ import { create } from "zustand";
 
 // store todo
 const useTodos = create((set) =>({
+    todolist:[],
     checkEditTitle:false,
     // property untuk show modal add todolist
     showModalAddTodoList:false,
