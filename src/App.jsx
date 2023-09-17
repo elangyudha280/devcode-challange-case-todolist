@@ -4,9 +4,11 @@ import { useState } from 'react'
 // import router
 import { Routes,Route } from 'react-router-dom'
 
-// import page componet
+// import page component
 import HomePage from './pages/homepage'
 import DetailPage from './pages/detailPage'
+
+
 
 function App() {
 

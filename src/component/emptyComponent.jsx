@@ -7,8 +7,9 @@ import  emptyTodoImg from '../assets/images/todo-empty-state.svg'
 // import function post data activity
 // import addDataActivity from "../utils/activity";
 
-// import store
+// import store   
 import useStoreActivity from "../store/storeActivity";
+import useTodos from "../store/storeTodo";
 // component empty activity
 const EmptyActivity = ()=>{
     let  setCheckDataChange = useStoreActivity((state)=> state.setCheckDataChange)
@@ -46,8 +47,12 @@ const EmptyActivity = ()=>{
 
 // empty todo
 const EmptyTodo = ()=>{
+
+    // useStore
+    const setModal = useTodos((state)=> state.setModal)
+
     return (
-        <section data-cy="todo-empty-statee" className="todo_empty_state  mt-3 cursor-pointer relative w-full flex justify-center pt-5">
+        <section onClick={setModal.bind(this,true)} data-cy="todo-empty-statee" className="todo_empty_state  mt-3 cursor-pointer relative w-full flex justify-center pt-5">
             <img src={emptyTodoImg} className="mx-auto w-[900px]  h-[400px] object-contain  inline-block" alt="empty_todo_img"  />
         </section>
     )

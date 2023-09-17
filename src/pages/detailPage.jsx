@@ -26,7 +26,7 @@ const DetailPage = ()=>{
     const {id} = useParams()
 
     // import store
-    const  [checkEditTitle,setEditTitle,setDataEditTitle,setStoreTitleActivity] = useTodos((state)=>[state.checkEditTitle,state.setEditTitle,state.setDataEditTitle,state.setTitleActivity],shallow)
+    const  [checkEditTitle,showModalAddTodoList,setModal,setEditTitle,setDataEditTitle,setStoreTitleActivity] = useTodos((state)=>[state.checkEditTitle,state.showModalAddTodoList,state.setModal,state.setEditTitle,state.setDataEditTitle,state.setTitleActivity],shallow)
    
     // state TITLE activity
     const [titleActivity,setTitleActivity] = useState('')
@@ -95,7 +95,9 @@ const DetailPage = ()=>{
 
     return (
         <PagesLayout title="detailActivity" page="detail" onClick={closeModeEdit}>
-            <ModalAddTodoList/>
+            {
+            showModalAddTodoList &&  <ModalAddTodoList/>
+            }
             <section className="max-w-[1020px] px-2 mx-auto mt-[2em]"  >
                 {/* header Detail Activty */}
                 <header className="header_detail_activity">
@@ -141,7 +143,7 @@ const DetailPage = ()=>{
                         </button>
 
                         {/* button add todo */}
-                        <button data-cy="todo-add-button" className="relative flex items-center gap-[2px] h-[40px]  justify-center rounded-full w-auto px-3  transition-all duration-300 hover:opacity-[0.6] text-white bg-blue-navbar py-2.5 md:h-[45px]">
+                        <button onClick={setModal.bind(this,true)} data-cy="todo-add-button" className="relative flex items-center gap-[2px] h-[40px]  justify-center rounded-full w-auto px-3  transition-all duration-300 hover:opacity-[0.6] text-white bg-blue-navbar py-2.5 md:h-[45px]">
                             <BiPlus className="text-[0.9em] md:text-[1em] font-bold" />
                             <p className="text-[0.9em] md:text-[1em] font-semibold">Tambah</p>
                         </button>

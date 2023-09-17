@@ -18,6 +18,8 @@ const useTodos = create((set) =>({
             return {checkEditTitle:false}
         })
     },
+    // method open || close modal
+    setModal:(action)=> set({showModalAddTodoList:action}),
     // method untuk edit detail activity
     setTitleActivity: async (titleActivity,id)=>{
         try{

@@ -4,7 +4,7 @@ import { shallow } from "zustand/shallow";
 
 // import store activity
 import useStoreActivity from "../store/storeActivity";
-
+import useTodos from "../store/storeTodo";
 // ImWarning
 import { IoWarningOutline } from "react-icons/io5";
 import {FiAlertCircle}from "react-icons/fi"
@@ -89,6 +89,9 @@ const ModalSuccessDelete = ({title})=>{
 // model add todo list
 const ModalAddTodoList = ()=>{
 
+    // use store todo
+    let setModal = useTodos((state) => state.setModal)
+
     // state input todo
     let [inputTodo,setInputTodo] = useState('')
     // state open dropdown
@@ -104,14 +107,14 @@ const ModalAddTodoList = ()=>{
     }
 
     return (
-        <section className="modal_container overflow-y-auto overflow-x-hidden pb-[5em]">
+        <section onClick={setModal.bind(this,false)} className="modal_container overflow-y-auto overflow-x-hidden pb-[5em]">
 
                 {/* card modal  */}
-                <div className="card_modal_todolist  ">
+                <div onClick={(e)=>{e.stopPropagation()}} className="card_modal_todolist  ">
                     {/* header modal */}
                     <div className="header_modal_todolist relative flex items-center w-full p-4 border-b-[1px] " >
                         <p className="font-medium flex-1 w-full text-[1.2em] text-slate-950">Tambah List Item</p>
-                        <button className="p-1 text-[1.5em] h-full"> 
+                        <button onClick={setModal.bind(this,false)} className="p-1 text-[1.5em] h-full"> 
                             <GrFormClose/>
                         </button>
                     </div>
