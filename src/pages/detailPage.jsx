@@ -131,7 +131,7 @@ const DetailPage = ()=>{
                                     (checkEditTitle) ? 
                                    (
                                     // input edit title activity
-                                     <input type="text" onChange={setTitle} defaultValue={titleActivity} autoFocus={true} className=" flex-1 w-full  bg-transparent font-semibold outline-none text-[1.3em] md:border-b-[1px] md:border-b-slate-200  md:text-[1.5em]" />
+                                     <input type="text" onChange={setTitle} defaultValue={titleActivity} autoFocus={true} className=" flex-1 w-full  bg-transparent font-semibold outline-none text-[1.4em] md:border-b-[1px] md:border-b-slate-200  md:text-[1.5em]" />
                                     )
                                     :
                                     (
