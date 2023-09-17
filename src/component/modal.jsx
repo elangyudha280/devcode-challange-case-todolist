@@ -171,7 +171,7 @@ const ModalAddTodoList = ()=>{
                                                             dropdown_item
                                                             ${(el.id === currentPriority?.id) && 'bg-blue-navbar  text-white'}
                                                             `}>
-                                                                <div className={`icon_dropdown w-[10px] h-[10px] rounded-full ${el.color}`}></div>
+                                                                <div className={`icon_dropdown w-[10px] h-[10px] rounded-full ${el.priority}`}></div>
                                                                 <p className=" text-[0.9em] flex-1 w-full text-left capitalize">{el.title}</p>
                                                                 {(el.id === currentPriority?.id) &&<img src={IconCheck} alt="" className="object-center" />}  
                                                             </button>

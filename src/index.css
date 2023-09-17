@@ -79,3 +79,21 @@
 }
 
 }
+
+@layer utilities {
+   .very-high{
+      @apply bg-priority-very-high
+   }
+   .high{
+      @apply bg-priority-high
+   }
+   .medium{
+      @apply bg-priority-medium
+   }
+   .low{
+      @apply bg-priority-low
+   }
+   .very-low{
+      @apply bg-priority-very-low
+   }
+}
