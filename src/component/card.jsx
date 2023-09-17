@@ -56,4 +56,9 @@ const CardActivity = ({activity})=>{
     )
 }
 
-export {CardActivity}
+// card todo item
+const CardTodoItem = ()=>{
+    return 
+}
+
+export {CardActivity,CardTodoItem}
