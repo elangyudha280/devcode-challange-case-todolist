@@ -26,7 +26,7 @@ const DetailPage = ()=>{
     const {id} = useParams()
 
     // import store
-    const  [checkEditTitle,showModalAddTodoList,setModal,setEditTitle,setDataEditTitle,setStoreTitleActivity] = useTodos((state)=>[state.checkEditTitle,state.showModalAddTodoList,state.setModal,state.setEditTitle,state.setDataEditTitle,state.setTitleActivity],shallow)
+    const  [todolist,setDataTodolist,checkEditTitle,showModalAddTodoList,setModal,setEditTitle,setDataEditTitle,setStoreTitleActivity] = useTodos((state)=>[state.todolist,state.setDataTodolist,state.checkEditTitle,state.showModalAddTodoList,state.setModal,state.setEditTitle,state.setDataEditTitle,state.setTitleActivity],shallow)
    
     // state TITLE activity
     const [titleActivity,setTitleActivity] = useState('')
@@ -56,6 +56,22 @@ const DetailPage = ()=>{
         })
         .then(result => setTitleActivity(result.title))
         .catch(error => '')
+    },[])
+
+    // get data todolist
+    useEffect(()=>{
+        fetch(`https://todo.api.devcode.gethired.id/todo-items?activity_group_id=${id}`).then(Response=>{
+            if(!Response.ok){
+                throw new Error('TODO ITEM TIDAK BERHASIL DI DAPATKAN')
+            }
+            return Response.json()
+        })
+        .then(result=>{
+            // update data todo item
+            setDataTodolist(result.data)
+        })
+        .catch(err =>err)
+        .finally(()=>{''})
     },[])
 
     // close mode edit title
@@ -151,13 +167,23 @@ const DetailPage = ()=>{
                 </header>
 
                 {/* body content todo item */}
-                {/* empty todo */}
-                {/* <EmptyTodo/> */}
+                {
+                    todolist?.length < 1 ?
+                    //  empty todo 
+                    <EmptyTodo/> 
+                    :
+                    // todo container
+                    <section className="todo_container">
+                        {
+                            todolist?.map(el =>{
+                                return <CardTodoItem key={el.id} />
+                            })
+                        }
+                    </section>
+                }
+                
 
-                {/* todo container */}
-                <section className="todo_container">
-                    <CardTodoItem/>
-                </section>
+               
                 
             </section>
         </PagesLayout>

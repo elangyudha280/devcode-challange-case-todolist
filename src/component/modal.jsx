@@ -152,7 +152,7 @@ const ModalAddTodoList = ()=>{
                                                     :
                                                     (
                                                         <>
-                                                        <div className={`icon_dropdown w-[10px] h-[10px] ${currentPriority?.color} rounded-full`}></div>
+                                                        <div className={`icon_dropdown w-[10px] h-[10px] ${currentPriority?.priority} rounded-full`}></div>
                                                             <p className=" text-[0.9em] flex-1 w-full text-left">{currentPriority?.title}</p>
                                                         <RiArrowDropDownLine className="text-[1.5em] transition-all duration-100"/>
                                                         </>

@@ -7,6 +7,8 @@ const useTodos = create((set) =>({
     checkEditTitle:false,
     // property untuk show modal add todolist
     showModalAddTodoList:false,
+    // method set data todolist
+    setDataTodolist: (data)=>set(state => ({todolist:data})),
     // method mode edit
     setEditTitle: ()=>{
         set(state =>{
