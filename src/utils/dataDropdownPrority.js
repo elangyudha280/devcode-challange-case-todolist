@@ -15,7 +15,7 @@ const dataDropdownPriority = [
     {
         id:3,
         title:'medium',
-        priority:'medium'
+        priority:'normal'
     },
     {
         id:4,

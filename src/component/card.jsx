@@ -57,7 +57,7 @@ const CardActivity = ({activity})=>{
 }
 
 // card todo item
-const CardTodoItem = ()=>{
+const CardTodoItem = ({title,priority,id_todo})=>{
     return (
         <div className="card_todo_item">
             
@@ -67,11 +67,11 @@ const CardTodoItem = ()=>{
             <input type="checkbox" className="w-[20px] outline-none  h-[20px]" />
              
             {/* icon priority */}
-            <div className={`icon_dropdown w-[12px] h-[12px] rounded-full bg-orange-500`}></div>
+            <div className={`icon_dropdown w-[12px] h-[12px] rounded-full ${priority}`}></div>
             </div>
 
             {/* title todo */}
-            <h2 className="font-medium ">todolist</h2>
+            <h2 className="font-medium truncate">{title}</h2>
 
             {/* button edit todo */}
             <button className="text-[1.4em] text-slate-400">

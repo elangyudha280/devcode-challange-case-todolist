@@ -75,7 +75,7 @@
 }
 
 .todo_container{
-   @apply relative w-full mt-9;
+   @apply relative w-full mt-9 flex flex-col gap-3;
 }
 
 }
@@ -87,7 +87,7 @@
    .high{
       @apply bg-priority-high
    }
-   .medium{
+   .normal{
       @apply bg-priority-medium
    }
    .low{

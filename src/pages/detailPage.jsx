@@ -26,7 +26,7 @@ const DetailPage = ()=>{
     const {id} = useParams()
 
     // import store
-    const  [todolist,setDataTodolist,checkEditTitle,showModalAddTodoList,setModal,setEditTitle,setDataEditTitle,setStoreTitleActivity] = useTodos((state)=>[state.todolist,state.setDataTodolist,state.checkEditTitle,state.showModalAddTodoList,state.setModal,state.setEditTitle,state.setDataEditTitle,state.setTitleActivity],shallow)
+    const  [todolist,setDataTodolist,checkEditTitle,checkChangeTodos,showModalAddTodoList,setModal,setEditTitle,setDataEditTitle,setStoreTitleActivity] = useTodos((state)=>[state.todolist,state.setDataTodolist,state.checkEditTitle,state.checkChangeTodos,state.showModalAddTodoList,state.setModal,state.setEditTitle,state.setDataEditTitle,state.setTitleActivity],shallow)
    
     // state TITLE activity
     const [titleActivity,setTitleActivity] = useState('')
@@ -71,8 +71,8 @@ const DetailPage = ()=>{
             setDataTodolist(result.data)
         })
         .catch(err =>err)
-        .finally(()=>{''})
-    },[])
+        .finally(()=>'')
+    },[checkChangeTodos])
 
     // close mode edit title
     const closeModeEdit = () =>{
@@ -176,7 +176,7 @@ const DetailPage = ()=>{
                     <section className="todo_container">
                         {
                             todolist?.map(el =>{
-                                return <CardTodoItem key={el.id} />
+                                return <CardTodoItem key={el.id} title={el.title} priority={el.priority}/>
                             })
                         }
                     </section>

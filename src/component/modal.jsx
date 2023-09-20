@@ -12,6 +12,8 @@ import {GrFormClose} from "react-icons/gr"
 import {RiArrowDropDownLine} from "react-icons/ri"
 import IconCheck from '../assets/images/icon_sort_active.svg'
 
+import { useParams } from "react-router-dom";
+
 
 // utils
 import dataDropdownPriority from "../utils/dataDropdownPrority";
@@ -88,9 +90,11 @@ const ModalSuccessDelete = ({title})=>{
 
 // model add todo list
 const ModalAddTodoList = ()=>{
+    // id parameter activity
+    const {id} = useParams()
 
     // use store todo
-    let setModal = useTodos((state) => state.setModal)
+    let [setModal,postDataTodos] = useTodos((state) => [state.setModal,state.postDataTodos],shallow)
 
     // state input todo
     let [inputTodo,setInputTodo] = useState('')
@@ -106,6 +110,18 @@ const ModalAddTodoList = ()=>{
        setOpenDropdown(false)
     }
 
+    // event post data
+    const postTodos = (event)=>{
+        event.preventDefault()
+
+        if(inputTodo === '' || currentPriority === null){
+            return
+        }
+        // post data todos
+        postDataTodos(id,inputTodo,currentPriority?.priority)
+
+    }
+
     return (
         <section onClick={setModal.bind(this,false)} className="modal_container overflow-y-auto overflow-x-hidden pb-[5em]">
 
@@ -114,20 +130,20 @@ const ModalAddTodoList = ()=>{
                     {/* header modal */}
                     <div className="header_modal_todolist relative flex items-center w-full p-4 border-b-[1px] " >
                         <p className="font-medium flex-1 w-full text-[1.2em] text-slate-950">Tambah List Item</p>
-                        <button onClick={setModal.bind(this,false)} className="p-1 text-[1.5em] h-full"> 
+                        <button onClick={setModal.bind(this,false)} type="button" className="p-1 text-[1.5em] h-full"> 
                             <GrFormClose/>
                         </button>
                     </div>
 
                     {/* body modal */}
-                    <form action="">
-                        <div className="body_modal relative w-full  ">
+                    <form action="" onClick={postTodos}>
+                        <div className="body_modal relative w-full" >
                                 {/* modal input data*/}
                                 <div className="w-full py-5 px-4 border-b-[1px] ">
                                     {/* input todolist */}
                                     <div className="input-group">
-                                        <label htmlFor="input_todo" className="inline-block w-full font-semibold text-[0.8em]">Nama ListItem</label>
-                                    <input onChange={(e)=>{setInputTodo(e.target.value)}} type="text" autoFocus placeholder="Tambahkan Nama List Item" className="w-full py-3 rounded-md px-3 border-2 text-slate-400 outline-none focus:text-black transition-all duration-100 focus:border-blue-500" />
+                                        <label htmlFor="input_todo"  className="inline-block w-full font-semibold text-[0.8em]">Nama ListItem</label>
+                                    <input onChange={(e)=>{setInputTodo(e.target.value)}} required type="text" autoFocus placeholder="Tambahkan Nama List Item" className="w-full py-3 rounded-md px-3 border-2 placeholder:text-slate-400 outline-none text-black transition-all duration-100 focus:border-blue-500  " />
                                     </div>
 
                                     {/* input priority */}
