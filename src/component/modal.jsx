@@ -126,11 +126,11 @@ const ModalAddTodoList = ()=>{
         <section onClick={setModal.bind(this,false)} className="modal_container overflow-y-auto overflow-x-hidden pb-[5em]">
 
                 {/* card modal  */}
-                <div onClick={(e)=>{e.stopPropagation()}} className="card_modal_todolist  ">
+                <div onClick={(e)=>{e.stopPropagation()}} className="card_modal_todolist" data-cy="modal-add">
                     {/* header modal */}
                     <div className="header_modal_todolist relative flex items-center w-full p-4 border-b-[1px] " >
-                        <p className="font-medium flex-1 w-full text-[1.2em] text-slate-950">Tambah List Item</p>
-                        <button onClick={setModal.bind(this,false)} type="button" className="p-1 text-[1.5em] h-full"> 
+                        <p className="font-medium flex-1 w-full text-[1.2em] text-slate-950" data-cy="modal-add-title">Tambah List Item</p>
+                        <button onClick={setModal.bind(this,false)} type="button" className="p-1 text-[1.5em] h-full" data-cy="modal-add-close-button"> 
                             <GrFormClose/>
                         </button>
                     </div>
@@ -142,17 +142,17 @@ const ModalAddTodoList = ()=>{
                                 <div className="w-full py-5 px-4 border-b-[1px] ">
                                     {/* input todolist */}
                                     <div className="input-group">
-                                        <label htmlFor="input_todo"  className="inline-block w-full font-semibold text-[0.8em]">Nama ListItem</label>
-                                    <input onChange={(e)=>{setInputTodo(e.target.value)}} required type="text" autoFocus placeholder="Tambahkan Nama List Item" className="w-full py-3 rounded-md px-3 border-2 placeholder:text-slate-400 outline-none text-black transition-all duration-100 focus:border-blue-500  " />
+                                        <label htmlFor="input_todo" data-cy="modal-add-name-title"  className="inline-block w-full font-semibold text-[0.8em]">Nama ListItem</label>
+                                    <input onChange={(e)=>{setInputTodo(e.target.value)}} data-cy="modal-add-name-input" required type="text" autoFocus placeholder="Tambahkan Nama List Item" className="w-full py-3 rounded-md px-3 border-2 placeholder:text-slate-400 outline-none text-black transition-all duration-100 focus:border-blue-500  " />
                                     </div>
 
                                     {/* input priority */}
                                     <div className="input-group mt-3">
-                                        <label htmlFor="input_todo" className="inline-block w-full font-semibold text-[0.8em]">Priority</label>
+                                        <label htmlFor="input_todo" data-cy="modal-add-priority-title" className="inline-block w-full font-semibold text-[0.8em]">Priority</label>
 
                                         {/* // dropdown current */}
                                         <div className=" relative rounded-md w-[160px] z-[4]">
-                                            <button type="button" onClick={()=>{
+                                            <button type="button" data-cy="modal-add-priority-dropdown" onClick={()=>{
                                                 setOpenDropdown((!openDropdown ? true : false))
                                             }
                                                 } 
@@ -161,7 +161,7 @@ const ModalAddTodoList = ()=>{
                                                     currentPriority === null ?
                                                     (
                                                         <>
-                                                        <p className=" text-[0.9em] flex-1 w-full text-left">Pilih Priority</p>
+                                                        <p className=" text-[0.9em] flex-1 w-full text-left" data-cy="modal-add-priority-item">Pilih Priority</p>
                                                         <RiArrowDropDownLine className="text-[1.5em] transition-all duration-100"/>
                                                         </>
                                                     )
@@ -183,7 +183,7 @@ const ModalAddTodoList = ()=>{
                                               {
                                                     dataDropdownPriority?.map(el =>{
                                                         return (
-                                                            <button key={el.id} onClick={EventSetPriority.bind(this,el)} type="button"  className={`
+                                                            <button key={el.id} data-cy="modal-add-priority-item" onClick={EventSetPriority.bind(this,el)} type="button"  className={`
                                                             dropdown_item
                                                             ${(el.id === currentPriority?.id) && 'bg-blue-navbar  text-white'}
                                                             `}>
@@ -202,7 +202,7 @@ const ModalAddTodoList = ()=>{
 
                                 {/* modal submit data */}
                                 <div className="flex w-full py-5 justify-end items-center px-4">
-                                    <button type="submit" disabled={
+                                    <button type="submit" data-cy="modal-add-save-button" disabled={
                                         (inputTodo === '' || currentPriority === null) ? true : false
                                          } className={`btn_sumbit_todo px-6 py-3 bg-blue-navbar rounded-full text-white
                                          ${(inputTodo === '' || currentPriority === null) && 'opacity-[0.7]' }
