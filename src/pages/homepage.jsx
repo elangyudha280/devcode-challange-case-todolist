@@ -17,12 +17,22 @@ import { BiPlus } from "react-icons/bi";
 
 // import store
 import useStoreActivity from "../store/storeActivity";
+import useTodos from "../store/storeTodo";
 
 const HomePage =  () =>{
 
     // data activity
     let [dataActivity,setDataActivity,checkDataChange,setCheckDataChange,modalActivity]  = useStoreActivity((state)=> [state.dataActivity,state.setDataActivity,state.checkDataChange,state.setCheckDataChange,state.modalActivity])
  
+    // STORE TODO
+    let [setDataTodolist,setModalDeleteTodo,setModal] = useTodos(state => [state.setDataTodolist,state.setModalDeleteTodo,state.setModal],shallow)
+
+    useEffect(()=>{
+        // RESET DTA TODO LIST
+        setDataTodolist([])
+        setModalDeleteTodo(false,[],false)
+        setModal(false)
+    },[])
 
     useEffect(()=>{
         fetch('https://todo.api.devcode.gethired.id/activity-groups?email=elangyudharakasiwi@gmail.com').then(Response =>{

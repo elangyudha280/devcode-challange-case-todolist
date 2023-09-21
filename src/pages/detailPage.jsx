@@ -5,7 +5,7 @@ import PagesLayout from "../layout/pagesLayout";
 
 // import component
 import { EmptyTodo } from "../component/emptyComponent";
-import { ModalAddTodoList } from "../component/modal";
+import { ModalAddTodoList,ModalDeleteTodoList } from "../component/modal";
 import { CardTodoItem } from "../component/card";
 // import store
 import useTodos from "../store/storeTodo";
@@ -26,7 +26,7 @@ const DetailPage = ()=>{
     const {id} = useParams()
 
     // import store
-    const  [todolist,setDataTodolist,checkEditTitle,checkChangeTodos,showModalAddTodoList,setModal,setEditTitle,setDataEditTitle,setStoreTitleActivity] = useTodos((state)=>[state.todolist,state.setDataTodolist,state.checkEditTitle,state.checkChangeTodos,state.showModalAddTodoList,state.setModal,state.setEditTitle,state.setDataEditTitle,state.setTitleActivity],shallow)
+    const  [todolist,setDataTodolist,checkEditTitle,checkChangeTodos,showModalAddTodoList,setModal,setEditTitle,setDataEditTitle,setStoreTitleActivity,modalDeleteTodo] = useTodos((state)=>[state.todolist,state.setDataTodolist,state.checkEditTitle,state.checkChangeTodos,state.showModalAddTodoList,state.setModal,state.setEditTitle,state.setDataEditTitle,state.setTitleActivity,state.modalDeleteTodo],shallow)
    
     // state TITLE activity
     const [titleActivity,setTitleActivity] = useState('')
@@ -111,8 +111,13 @@ const DetailPage = ()=>{
 
     return (
         <PagesLayout title="detailActivity" page="detail" onClick={closeModeEdit}>
+            {/* modal add data todos */}
             {
             showModalAddTodoList &&  <ModalAddTodoList/>
+            }
+            {/* modal Delete Todos */}
+            {
+                modalDeleteTodo?.condition && <ModalDeleteTodoList/>
             }
             <section className="max-w-[1020px] px-2 mx-auto mt-[2em]"  >
                 {/* header Detail Activty */}

@@ -4,6 +4,11 @@ import { create } from "zustand";
 // store todo
 const useTodos = create((set,get) =>({
     todolist:[],
+    modalDeleteTodo:{
+        condition:false,
+        data:[],
+        successCondition:false
+    },
     checkEditTitle:false,
     checkChangeTodos:false,
     // property untuk show modal add todolist
@@ -80,6 +85,11 @@ const useTodos = create((set,get) =>({
         catch(e){
             return e
         }
+    },
+    setModalDeleteTodo(condition,data,successCondition){
+        set((state)=>{
+            return {modalDeleteTodo:{condition,data,successCondition}}
+        })
     }
 }))
 

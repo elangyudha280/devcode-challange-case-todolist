@@ -25,18 +25,28 @@ const  LayoutModalDelete  = ({title,type,eventCloseModal,eventDeleteData})=>{
             <IoWarningOutline className="block mx-auto text-[5em] text-red-400"/>
 
             <h2 data-cy="modal-delete-title" className="text-center text-[0.9em] mt-5 font-medium">
-            Apakah anda yakin menghapus Activity  "<span className="font-bold">{modalActivity?.data?.title}</span>"?
+            Apakah anda yakin menghapus {type}  "<span className="font-bold">{title}</span>"?
             </h2>
 
             <div className="flex justify-evenly mt-5 gap-x-5 gap-y-4">
-                    <button data-cy="modal-delete-cancel-button" onClick={closeModal} className="btn_batal w-full bg-slate-300 text-slate-500 font-semibold rounded-[2em] py-3 flex-1">
+                    <button data-cy="modal-delete-cancel-button" onClick={eventCloseModal} className="btn_batal w-full bg-slate-300 text-slate-500 font-semibold rounded-[2em] py-3 flex-1">
                         Batal
                     </button>
-                    <button data-cy="modal-delete-confirm-button" onClick={DeleteDataActiviy} className="btn_delete bg-red-600 text-white font-semibold rounded-[2em] py-3 w-full flex-1">
+                    <button data-cy="modal-delete-confirm-button" onClick={eventDeleteData} className="btn_delete bg-red-600 text-white font-semibold rounded-[2em] py-3 w-full flex-1">
                         Hapus
                     </button>
             </div>
         </div>    
+    )
+}
+
+// modal success delete activity
+const LayoutModalSuccessDelete = ({title})=>{
+    return (
+        <div data-cy="modal-information" className="card_modal flex flex-col items-center min-[300px]:items-stretch  min-[300px]:flex-row py-3 px-5 gap-2">
+            <FiAlertCircle className="text-green-600 text-[1.5em] inline-block"/>
+            <p className="msg_success font-medium text-center min-[300px]:text-start flex-1 w-full">{title}</p>
+        </div>
     )
 }
 
@@ -77,38 +87,15 @@ const ModalDeleteActivity = ()=>{
         <section className="modal_container"   onClick={closeModal}>
           {
             !modalActivity?.successCondition ?
-             <div data-cy="modal-delete" className="card_modal" onClick={(e)=>{e.stopPropagation()}}>
-                <IoWarningOutline className="block mx-auto text-[5em] text-red-400"/>
-
-                <h2 data-cy="modal-delete-title" className="text-center text-[0.9em] mt-5 font-medium">
-                Apakah anda yakin menghapus Activity  "<span className="font-bold">{modalActivity?.data?.title}</span>"?
-                </h2>
-
-                <div className="flex justify-evenly mt-5 gap-x-5 gap-y-4">
-                        <button data-cy="modal-delete-cancel-button" onClick={closeModal} className="btn_batal w-full bg-slate-300 text-slate-500 font-semibold rounded-[2em] py-3 flex-1">
-                            Batal
-                        </button>
-                        <button data-cy="modal-delete-confirm-button" onClick={DeleteDataActiviy} className="btn_delete bg-red-600 text-white font-semibold rounded-[2em] py-3 w-full flex-1">
-                            Hapus
-                        </button>
-                </div>
-            </div> 
+           <LayoutModalDelete title={modalActivity?.data?.title} type='Activity' eventCloseModal={closeModal} eventDeleteData={DeleteDataActiviy} />
             :
-            <ModalSuccessDelete title="activity berhasil di hapus"/>
+            <LayoutModalSuccessDelete title="activity berhasil di hapus"/>
           }
         </section>
     )
 }
 
-// modal success delete activity
-const ModalSuccessDelete = ({title})=>{
-    return (
-        <div data-cy="modal-information" className="card_modal flex flex-col items-center min-[300px]:items-stretch  min-[300px]:flex-row py-3 px-5 gap-2">
-            <FiAlertCircle className="text-green-600 text-[1.5em] inline-block"/>
-            <p className="msg_success font-medium text-center min-[300px]:text-start flex-1 w-full">{title}</p>
-        </div>
-    )
-}
+
 
 // model add todo list
 const ModalAddTodoList = ()=>{
@@ -239,6 +226,50 @@ const ModalAddTodoList = ()=>{
     )
 }
 
+// MODAL DELETE TODOLIST 
+const ModalDeleteTodoList = ()=>{
+    let [modalDeleteTodo,setModalDeleteTodo,setChangeTodos] = useTodos(state => [state.modalDeleteTodo,state.setModalDeleteTodo,state.setChangeTodos],shallow)
+
+    // delete todos
+     // delete data
+     const DeleteDataActiviy = ()=>{
+        fetch(`https://todo.api.devcode.gethired.id/todo-items/${modalDeleteTodo?.data?.id}`,{
+            method:'delete'
+        }).then(Response =>{
+            if(!Response.ok){
+                throw new Error('gagal menghapus data activity')
+            }
+
+            return Response.json()
+        })
+        .then(e =>{
+            setModalDeleteTodo(true,[],true)
+            setChangeTodos()
+        })
+        .catch(err =>{
+            return err
+        })
+        .finally(()=>{
+            return
+        })
+    }
+
+     // closeModal
+     const closeModal = ()=>{
+        setModalDeleteTodo(false,[],false)
+    }
+    return (
+        <section className="modal_container"   onClick={closeModal}>
+            {
+            !modalDeleteTodo?.successCondition ?
+            <LayoutModalDelete title={modalDeleteTodo?.data.title} type='todo' eventCloseModal={closeModal} eventDeleteData={DeleteDataActiviy} />
+            :
+            <LayoutModalSuccessDelete title="activity berhasil di hapus"/>
+            }
+        </section>
+    )
+}
 
 
-export {ModalDeleteActivity,ModalAddTodoList}
+
+export {ModalDeleteActivity,ModalAddTodoList,ModalDeleteTodoList}

@@ -2,7 +2,7 @@ import React from "react";
 
 // import store activity
 import useStoreActivity from "../store/storeActivity";
-
+import useTodos from "../store/storeTodo";
 
 // import icon 
 import { BiTrash } from "react-icons/bi";
@@ -32,7 +32,7 @@ const CardActivity = ({activity})=>{
             setModalActivity(true,e)
         })
         .catch(err =>{
-           return e
+           return err
         })
         .finally(()=>{
            return
@@ -58,6 +58,29 @@ const CardActivity = ({activity})=>{
 
 // card todo item
 const CardTodoItem = ({title,priority,id_todo})=>{
+
+    // USE TODOS
+    let setModalDeleteTodo = useTodos(state => state.setModalDeleteTodo)
+
+    const openModal = (event) =>{
+        fetch(`https://todo.api.devcode.gethired.id/todo-items/${id_todo}`).then(Response =>{
+            if(!Response.ok){
+                throw new Error('gagal mengambil data todos')
+            }
+
+            return Response.json()
+        })
+        .then(data =>{
+            setModalDeleteTodo(true,data)
+        })
+        .catch(err =>{
+           return err
+        })
+        .finally(()=>{
+           return
+        })
+    }
+
     return (
         <div className="card_todo_item">
             
@@ -79,8 +102,8 @@ const CardTodoItem = ({title,priority,id_todo})=>{
             </button>
 
             {/* BUTTON DELETE */}
-            <div className="flex-1 w-full flex justify-end items-center">
-                    <button className="text-slate-400 grid place-items-center text-[1.4em]">
+            <div  className="flex-1 w-full flex justify-end items-center">
+                    <button  onClick={openModal} className="text-slate-400 grid place-items-center text-[1.4em]">
                         <TbTrash/>
                     </button>
             </div>
