@@ -57,10 +57,10 @@ const CardActivity = ({activity})=>{
 }
 
 // card todo item
-const CardTodoItem = ({title,priority,id_todo})=>{
+const CardTodoItem = ({title,priority,id_todo,is_active})=>{
 
     // USE TODOS
-    let setModalDeleteTodo = useTodos(state => state.setModalDeleteTodo)
+    let [setModalDeleteTodo,setChangeTodos] = useTodos(state => [state.setModalDeleteTodo,state.setChangeTodos])
 
     const openModal = (event) =>{
         fetch(`https://todo.api.devcode.gethired.id/todo-items/${id_todo}`).then(Response =>{
@@ -83,7 +83,26 @@ const CardTodoItem = ({title,priority,id_todo})=>{
 
     // check status todo
     const checkTodo = (event)=>{
-        console.log(event.target.checked)
+        // set data raw
+        let raw = {
+            is_active:(event.target.checked) ? 0 : 1
+        };
+
+        // set request option
+        let requestOptions = {
+        method: 'PATCH',
+        headers:{
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(raw),
+        redirect: 'follow'
+        };
+
+        // update checked todo
+        fetch(`https://todo.api.devcode.gethired.id/todo-items/${id_todo}`, requestOptions)
+        .then(response => response.status)
+        .then(result => setChangeTodos())
+        .catch(error => console.log('error', error))
     }
 
     return (
@@ -92,14 +111,14 @@ const CardTodoItem = ({title,priority,id_todo})=>{
             {/* check todo*/}
             <div className="flex gap-4 items-center">
             {/* input check todo */}
-            <input type="checkbox" onClick={checkTodo} className="w-[20px] outline-none  h-[20px]" />
+            <input type="checkbox" defaultChecked={!is_active ? true : false} onClick={checkTodo} className="w-[20px] outline-none  h-[20px]" />
              
             {/* icon priority */}
             <div className={`icon_dropdown w-[12px] h-[12px] rounded-full ${priority}`}></div>
             </div>
 
             {/* title todo */}
-            <h2 className="font-medium truncate">{title}</h2>
+            <h2 className={`font-medium truncate transition-all duration-150 ${!is_active && 'line-through text-slate-400'}`}>{title}</h2>
 
             {/* button edit todo */}
             <button className="text-[1.4em] text-slate-400">

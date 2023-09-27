@@ -145,10 +145,10 @@ const ModalAddTodoList = ()=>{
                     </div>
 
                     {/* body modal */}
-                    <form action="" onClick={postTodos}>
+                    <form action="" onSubmit={postTodos}>
                         <div className="body_modal relative w-full" >
                                 {/* modal input data*/}
-                                <div className="w-full py-5 px-4 border-b-[1px] ">
+                                <div className="w-full py-5 px-4 border-b-[1px] " onClick={(e)=>{e.stopPropagation()}}>
                                     {/* input todolist */}
                                     <div className="input-group">
                                         <label htmlFor="input_todo" data-cy="modal-add-name-title"  className="inline-block w-full font-semibold text-[0.8em]">Nama ListItem</label>
@@ -156,7 +156,7 @@ const ModalAddTodoList = ()=>{
                                     </div>
 
                                     {/* input priority */}
-                                    <div className="input-group mt-3">
+                                    <div className="input-group mt-3" >
                                         <label htmlFor="input_todo" data-cy="modal-add-priority-title" className="inline-block w-full font-semibold text-[0.8em]">Priority</label>
 
                                         {/* // dropdown current */}
@@ -210,8 +210,8 @@ const ModalAddTodoList = ()=>{
                                 </div>
 
                                 {/* modal submit data */}
-                                <div className="flex w-full py-5 justify-end items-center px-4">
-                                    <button type="submit" data-cy="modal-add-save-button" disabled={
+                                <div  className="flex w-full py-5 justify-end items-center px-4">
+                                    <button  type="submit" data-cy="modal-add-save-button" disabled={
                                         (inputTodo === '' || currentPriority === null) ? true : false
                                          } className={`btn_sumbit_todo px-6 py-3 bg-blue-navbar rounded-full text-white
                                          ${(inputTodo === '' || currentPriority === null) && 'opacity-[0.7]' }

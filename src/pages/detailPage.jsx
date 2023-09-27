@@ -181,7 +181,7 @@ const DetailPage = ()=>{
                     <section className="todo_container">
                         {
                             todolist?.map(el =>{
-                                return <CardTodoItem key={el.id} id_todo={el.id} title={el.title} priority={el.priority}/>
+                                return <CardTodoItem key={el.id} id_todo={el.id} is_active={el.is_active} title={el.title} priority={el.priority}/>
                             })
                         }
                     </section>
