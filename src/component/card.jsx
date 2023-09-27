@@ -118,7 +118,7 @@ const CardTodoItem = ({title,priority,id_todo,is_active})=>{
             </div>
 
             {/* title todo */}
-            <h2 className={`font-medium truncate transition-all duration-150 ${!is_active && 'line-through text-slate-400'}`}>{title}</h2>
+            <h2 className={`font-medium truncate transition-all duration-75 ${!is_active && 'line-through text-slate-400'}`}>{title}</h2>
 
             {/* button edit todo */}
             <button className="text-[1.4em] text-slate-400">
