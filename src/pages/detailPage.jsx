@@ -113,7 +113,7 @@ const DetailPage = ()=>{
         <PagesLayout title="detailActivity" page="detail" onClick={closeModeEdit}>
             {/* modal add data todos */}
             {
-            showModalAddTodoList &&  <ModalAddTodoList/>
+            showModalAddTodoList.condition &&  <ModalAddTodoList title={showModalAddTodoList.typeModal} />
             }
             {/* modal Delete Todos */}
             {
@@ -164,7 +164,7 @@ const DetailPage = ()=>{
                         </button>
 
                         {/* button add todo */}
-                        <button onClick={setModal.bind(this,true)} data-cy="todo-add-button" className="relative flex items-center gap-[2px] h-[40px]  justify-center rounded-full w-auto px-3  transition-all duration-300 hover:opacity-[0.6] text-white bg-blue-navbar py-2.5 md:h-[45px]">
+                        <button onClick={setModal.bind(this,true,'Tambah List Item')} data-cy="todo-add-button" className="relative flex items-center gap-[2px] h-[40px]  justify-center rounded-full w-auto px-3  transition-all duration-300 hover:opacity-[0.6] text-white bg-blue-navbar py-2.5 md:h-[45px]">
                             <BiPlus className="text-[0.9em] md:text-[1em] font-bold" />
                             <p className="text-[0.9em] md:text-[1em] font-semibold">Tambah</p>
                         </button>

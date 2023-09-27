@@ -12,7 +12,11 @@ const useTodos = create((set,get) =>({
     checkEditTitle:false,
     checkChangeTodos:false,
     // property untuk show modal add todolist
-    showModalAddTodoList:false,
+    showModalAddTodoList:{
+        condition:false,
+        typeModal:'',
+        IDmodal:''
+    },
     // method set change todos
     setChangeTodos:()=> set(state =>{
         return {checkChangeTodos:(!state.checkChangeTodos?true:false)}
@@ -32,7 +36,11 @@ const useTodos = create((set,get) =>({
         })
     },
     // method open || close modal
-    setModal:(action)=> set({showModalAddTodoList:action}),
+    setModal:(action,typeModal,idModal)=> set({showModalAddTodoList:{
+        condition:action,
+        typeModal:typeModal,
+        idModal
+    }}),
     // method untuk edit detail activity
     setTitleActivity: async (titleActivity,id)=>{
         try{
@@ -77,13 +85,42 @@ const useTodos = create((set,get) =>({
             let xhr = await fetch("https://todo.api.devcode.gethired.id/todo-items", requestOptions)
             
             // close modal add data todolsit
-            get().setModal(false)
+            get().setModal(false,'',null)
             // aet check state
             get().setChangeTodos()
             
         }
         catch(e){
             return e
+        }
+    },
+    // update todolist
+    updateDataTodolist: async (id_activity,value_todos,priority)=>{
+        try{
+            let raw = {
+                title: value_todos,
+                priority:priority,
+            };
+    
+            let requestOptions = {
+            method: 'PATCH',
+            headers:{
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(raw),
+            redirect: 'follow'
+            };
+    
+            let xhr = await  fetch(`https://todo.api.devcode.gethired.id/todo-items/${id_activity}`, requestOptions)
+         
+              // close modal add data todolsit
+              get().setModal(false,'',null)
+              // aet check state
+              get().setChangeTodos()
+          
+        }
+        catch(e){
+                return e
         }
     },
     setModalDeleteTodo(condition,data,successCondition){

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { shallow } from "zustand/shallow";
 
@@ -103,7 +103,7 @@ const ModalAddTodoList = ({title,typeModal})=>{
     const {id} = useParams()
 
     // use store todo
-    let [setModal,postDataTodos] = useTodos((state) => [state.setModal,state.postDataTodos],shallow)
+    let [setModal,postDataTodos,showModalAddTodoList,updateDataTodolist] = useTodos((state) => [state.setModal,state.postDataTodos,state.showModalAddTodoList,state.updateDataTodolist],shallow)
 
     // state input todo
     let [inputTodo,setInputTodo] = useState('')
@@ -112,6 +112,21 @@ const ModalAddTodoList = ({title,typeModal})=>{
     // current priority
     let [currentPriority,setCurrentPriority] = useState(null)
 
+    useEffect(()=>{
+        // check apakah sedang dalam mode edit todo
+
+        if(title === 'Edit List Item'){
+            // filter priosrity
+            let findPriority = dataDropdownPriority.find(el =>{
+                return el.priority === showModalAddTodoList?.idModal.priority
+            })
+
+            // set value input todo
+            setInputTodo(showModalAddTodoList?.idModal.title)
+            // set priority
+            setCurrentPriority(findPriority)
+        }
+    },[])
   
     // event set priority
     const EventSetPriority = (priority,event)=>{
@@ -123,36 +138,53 @@ const ModalAddTodoList = ({title,typeModal})=>{
     const postTodos = (event)=>{
         event.preventDefault()
 
-        if(inputTodo === '' || currentPriority === null){
+        if(inputTodo === ''){
             return
         }
+
+        if(currentPriority === null){
+            setCurrentPriority(dataDropdownPriority[0])
+        }        
         // post data todos
         postDataTodos(id,inputTodo,currentPriority?.priority)
 
     }
 
+    // event update todos
+    const editUpdateTodo = (event)=>{
+        event.preventDefault()
+        if(inputTodo === ''){
+            return
+        }
+
+        if(currentPriority === null){
+            setCurrentPriority(dataDropdownPriority[0])
+        }  
+
+        updateDataTodolist(showModalAddTodoList?.idModal.id,inputTodo,currentPriority?.priority)
+    }
     return (
-        <section onClick={setModal.bind(this,false)} className="modal_container overflow-y-auto overflow-x-hidden pb-[5em]">
+        <section onClick={setModal.bind(this,false,'',null)} className="modal_container overflow-y-auto overflow-x-hidden pb-[5em]">
 
                 {/* card modal  */}
                 <div onClick={(e)=>{e.stopPropagation()}} className="card_modal_todolist" data-cy="modal-add">
                     {/* header modal */}
                     <div className="header_modal_todolist relative flex items-center w-full p-4 border-b-[1px] " >
-                        <p className="font-medium flex-1 w-full text-[1.2em] text-slate-950" data-cy="modal-add-title">Tambah List Item</p>
-                        <button onClick={setModal.bind(this,false)} type="button" className="p-1 text-[1.5em] h-full" data-cy="modal-add-close-button"> 
+                        <p className="font-medium flex-1 w-full text-[1.2em] text-slate-950" data-cy="modal-add-title">{title}</p>
+                        <button onClick={setModal.bind(this,false,'',null)} type="button" className="p-1 text-[1.5em] h-full" data-cy="modal-add-close-button"> 
                             <GrFormClose/>
                         </button>
                     </div>
 
                     {/* body modal */}
-                    <form action="" onSubmit={postTodos}>
+                    <form action="" onSubmit={(title === 'Edit List Item' ? editUpdateTodo : postTodos)}>
                         <div className="body_modal relative w-full" >
                                 {/* modal input data*/}
                                 <div className="w-full py-5 px-4 border-b-[1px] " onClick={(e)=>{e.stopPropagation()}}>
                                     {/* input todolist */}
                                     <div className="input-group">
-                                        <label htmlFor="input_todo" data-cy="modal-add-name-title"  className="inline-block w-full font-semibold text-[0.8em]">Nama ListItem</label>
-                                    <input onChange={(e)=>{setInputTodo(e.target.value)}} data-cy="modal-add-name-input" required type="text" autoFocus placeholder="Tambahkan Nama List Item" className="w-full py-3 rounded-md px-3 border-2 placeholder:text-slate-400 outline-none text-black transition-all duration-100 focus:border-blue-500  " />
+                                        <label htmlFor="input_todo"  data-cy="modal-add-name-title"  className="inline-block w-full font-semibold text-[0.8em]">Nama ListItem</label>
+                                    <input onChange={(e)=>{setInputTodo(e.target.value)}} defaultValue={inputTodo} data-cy="modal-add-name-input" required type="text" autoFocus placeholder="Tambahkan Nama List Item" className="w-full py-3 rounded-md px-3 border-2 placeholder:text-slate-400 outline-none text-black transition-all duration-100 focus:border-blue-500  " />
                                     </div>
 
                                     {/* input priority */}
@@ -212,9 +244,9 @@ const ModalAddTodoList = ({title,typeModal})=>{
                                 {/* modal submit data */}
                                 <div  className="flex w-full py-5 justify-end items-center px-4">
                                     <button  type="submit" data-cy="modal-add-save-button" disabled={
-                                        (inputTodo === '' || currentPriority === null) ? true : false
+                                        (inputTodo === '') ? true : false
                                          } className={`btn_sumbit_todo px-6 py-3 bg-blue-navbar rounded-full text-white
-                                         ${(inputTodo === '' || currentPriority === null) && 'opacity-[0.7]' }
+                                         ${(inputTodo === '') && 'opacity-[0.7]' }
                                          `}>
                                         Submit
                                     </button>

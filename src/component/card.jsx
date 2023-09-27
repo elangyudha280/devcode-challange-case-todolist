@@ -60,9 +60,9 @@ const CardActivity = ({activity})=>{
 const CardTodoItem = ({title,priority,id_todo,is_active})=>{
 
     // USE TODOS
-    let [setModalDeleteTodo,setChangeTodos] = useTodos(state => [state.setModalDeleteTodo,state.setChangeTodos])
+    let [setModalDeleteTodo,setChangeTodos,setModal] = useTodos(state => [state.setModalDeleteTodo,state.setChangeTodos,state.setModal])
 
-    const openModal = (event) =>{
+    const openModalDeleteTodo = (event) =>{
         fetch(`https://todo.api.devcode.gethired.id/todo-items/${id_todo}`).then(Response =>{
             if(!Response.ok){
                 throw new Error('gagal mengambil data todos')
@@ -72,6 +72,25 @@ const CardTodoItem = ({title,priority,id_todo,is_active})=>{
         })
         .then(data =>{
             setModalDeleteTodo(true,data)
+        })
+        .catch(err =>{
+           return err
+        })
+        .finally(()=>{
+           return
+        })
+    }
+
+    const openModalUpdateTodo = (event)=>{
+        fetch(`https://todo.api.devcode.gethired.id/todo-items/${id_todo}`).then(Response =>{
+            if(!Response.ok){
+                throw new Error('gagal mengambil data todos')
+            }
+
+            return Response.json()
+        })
+        .then(data =>{
+            setModal(true,'Edit List Item',data)
         })
         .catch(err =>{
            return err
@@ -121,13 +140,13 @@ const CardTodoItem = ({title,priority,id_todo,is_active})=>{
             <h2 className={`font-medium truncate transition-all duration-75 ${!is_active && 'line-through text-slate-400'}`}>{title}</h2>
 
             {/* button edit todo */}
-            <button className="text-[1.4em] text-slate-400">
+            <button onClick={openModalUpdateTodo} className="text-[1.4em] text-slate-400">
                 <TbPencil/>
             </button>
 
             {/* BUTTON DELETE */}
             <div  className="flex-1 w-full flex justify-end items-center">
-                    <button  onClick={openModal} className="text-slate-400 grid place-items-center text-[1.4em]">
+                    <button  onClick={openModalDeleteTodo} className="text-slate-400 grid place-items-center text-[1.4em]">
                         <TbTrash/>
                     </button>
             </div>
