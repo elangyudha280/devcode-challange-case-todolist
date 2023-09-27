@@ -81,13 +81,18 @@ const CardTodoItem = ({title,priority,id_todo})=>{
         })
     }
 
+    // check status todo
+    const checkTodo = (event)=>{
+        console.log(event.target.checked)
+    }
+
     return (
         <div className="card_todo_item">
             
             {/* check todo*/}
             <div className="flex gap-4 items-center">
             {/* input check todo */}
-            <input type="checkbox" className="w-[20px] outline-none  h-[20px]" />
+            <input type="checkbox" onClick={checkTodo} className="w-[20px] outline-none  h-[20px]" />
              
             {/* icon priority */}
             <div className={`icon_dropdown w-[12px] h-[12px] rounded-full ${priority}`}></div>
