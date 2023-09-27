@@ -98,7 +98,7 @@ const ModalDeleteActivity = ()=>{
 
 
 // model add todo list
-const ModalAddTodoList = ()=>{
+const ModalAddTodoList = ({title,typeModal})=>{
     // id parameter activity
     const {id} = useParams()
 
