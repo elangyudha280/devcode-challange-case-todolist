@@ -16,7 +16,8 @@ import {IoIosArrowForward} from 'react-icons/io'
 import {TbPencil} from 'react-icons/tb'
 import { BiPlus } from "react-icons/bi";
 import tableArrowsSort from '../assets/images/tabler_arrows-sort.svg'
-
+import iconSortTerbaru from '../assets/images/icon_sort_terbaru.svg'
+import iconCheckSort from '../assets/images/icon_sort_active.svg'
 
 import { Link,useParams } from "react-router-dom";
 
@@ -123,7 +124,7 @@ const DetailPage = ()=>{
             }
             <section className="max-w-[1020px] px-2 mx-auto mt-[2em]"  >
                 {/* header Detail Activty */}
-                <header className="header_detail_activity">
+                <header className="header_detail_activity z-[5]">
                     {/* icon nav */}
                     <div className="flex-1 flex w-full border-b-[1px] border-b-slate-200 py-2 md:border-0 md:py-0">
                         {/* nav to home */}
@@ -173,7 +174,14 @@ const DetailPage = ()=>{
                         
                         {/* dropdown Sorting */}
                         <div className="dropdown_container">
+                            <button type="button" className="dropdown_item w-full text-left hover:bg-white px-3 flex  items-center py-3 ">
+                                <img src={iconSortTerbaru} className="object-contain object-center" alt="" />
 
+                                <h2 className="flex-1 text-slate-500 capitalize">terbaru</h2>
+
+                                <img src={iconCheckSort} className="object-contain object-center" alt="" />
+                            </button>
+                            
                         </div>
 
                     </div>
