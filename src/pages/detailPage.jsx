@@ -31,6 +31,8 @@ const DetailPage = ()=>{
     // state TITLE activity
     const [titleActivity,setTitleActivity] = useState('')
 
+    // show dropdown sorting
+    let [showDropdown,setShowDropdown] = useState()
 
 
     // get data detail actiivty
@@ -157,7 +159,7 @@ const DetailPage = ()=>{
                     </div>
                     
                     {/* action nav add todo */}
-                    <div className="nav_item_add_todo">
+                    <div className="nav_item_add_todo relative border-2">
                         {/* button devide sort todo */}
                         <button data-cy="todo-sort-button" className="btn_sort_todo h-[40px] w-[40px] rounded-full bg-slate-100 border-[1px] border-slate-300 grid place-items-center md:h-[45px] md:w-[45px]" >
                             <img src={tableArrowsSort} className="object-center " alt="" />
@@ -168,6 +170,7 @@ const DetailPage = ()=>{
                             <BiPlus className="text-[0.9em] md:text-[1em] font-bold" />
                             <p className="text-[0.9em] md:text-[1em] font-semibold">Tambah</p>
                         </button>
+
                     </div>
                 </header>
 
