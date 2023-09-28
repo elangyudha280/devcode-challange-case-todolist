@@ -170,6 +170,11 @@ const DetailPage = ()=>{
                             <BiPlus className="text-[0.9em] md:text-[1em] font-bold" />
                             <p className="text-[0.9em] md:text-[1em] font-semibold">Tambah</p>
                         </button>
+                        
+                        {/* dropdown Sorting */}
+                        <div className="dropdown_container">
+
+                        </div>
 
                     </div>
                 </header>

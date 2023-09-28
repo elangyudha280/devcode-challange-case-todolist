@@ -78,6 +78,10 @@
    @apply relative w-full mt-9 flex flex-col gap-3;
 }
 
+.dropdown_container{
+   @apply absolute top-[110%] rounded-md bg-white border-2 md:w-full flex flex-col;
+}
+
 }
 
 @layer utilities {
