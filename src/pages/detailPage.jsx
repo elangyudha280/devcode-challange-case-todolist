@@ -35,6 +35,8 @@ const DetailPage = ()=>{
     // show dropdown sorting
     let [showDropdown,setShowDropdown] = useState()
 
+    // sorting active
+    let [sortingActive,setSortingActive] = useState(1)
 
     // get data detail actiivty
     useEffect(()=>{
