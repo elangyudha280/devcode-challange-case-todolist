@@ -88,7 +88,7 @@ const DetailPage = ()=>{
         return
     }
 
-    // event mode edit
+    // event mode edit title activity
     const modeEdit = (event)=>{
         event.stopPropagation()
         // jika sedang berada di mode edit maka ketika close ngirim data
@@ -103,7 +103,7 @@ const DetailPage = ()=>{
         setEditTitle()
     }
 
-    // set title 
+    // set title activuty
     let setTitle = (e)=>{
         if(e.target.value.length < 1){
             setTitleActivity('New Activity')
