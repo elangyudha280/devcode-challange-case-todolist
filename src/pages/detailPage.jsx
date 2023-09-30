@@ -21,13 +21,16 @@ import iconCheckSort from '../assets/images/icon_sort_active.svg'
 
 import { Link,useParams } from "react-router-dom";
 
+// data sorting
+import dropdownSorting from "../utils/dataDropdownSorting";
+
 const DetailPage = ()=>{
 
     // GET PARAMS
     const {id} = useParams()
 
     // import store
-    const  [todolist,setDataTodolist,checkEditTitle,checkChangeTodos,showModalAddTodoList,setModal,setEditTitle,setDataEditTitle,setStoreTitleActivity,modalDeleteTodo] = useTodos((state)=>[state.todolist,state.setDataTodolist,state.checkEditTitle,state.checkChangeTodos,state.showModalAddTodoList,state.setModal,state.setEditTitle,state.setDataEditTitle,state.setTitleActivity,state.modalDeleteTodo],shallow)
+    const  [todolist,setDataTodolist,checkEditTitle,checkChangeTodos,showModalAddTodoList,setModal,setEditTitle,setDataEditTitle,setStoreTitleActivity,modalDeleteTodo,sortingTodo] = useTodos((state)=>[state.todolist,state.setDataTodolist,state.checkEditTitle,state.checkChangeTodos,state.showModalAddTodoList,state.setModal,state.setEditTitle,state.setDataEditTitle,state.setTitleActivity,state.modalDeleteTodo,state.sortingTodo],shallow)
    
     // state TITLE activity
     const [titleActivity,setTitleActivity] = useState('')
@@ -114,6 +117,16 @@ const DetailPage = ()=>{
         setTitleActivity(e.target.value)
     }
 
+    // event set Sorting
+    let setSorting = ({id,type},event)=>{
+        // set active sorting
+        setSortingActive(id)
+        // sorting todo menggunakan fungsi yg ada di store todo
+        sortingTodo(type)
+        // close dropdown sorting
+        setShowDropdown(false)
+    }
+
     return (
         <PagesLayout title="detailActivity" page="detail" onClick={closeModeEdit}>
             {/* modal add data todos */}
@@ -164,27 +177,41 @@ const DetailPage = ()=>{
                     {/* action nav add todo */}
                     <div className="nav_item_add_todo relative">
                         {/* button devide sort todo */}
-                        <button data-cy="todo-sort-button" className="btn_sort_todo h-[40px] w-[40px] rounded-full bg-slate-100 border-[1px] border-slate-300 grid place-items-center md:h-[45px] md:w-[45px]" >
+                        <button onClick={(e)=>{
+                            setShowDropdown(!showDropdown?true:false)
+                        }} data-cy="todo-sort-button" className="btn_sort_todo h-[40px] w-[40px] rounded-full bg-slate-100 border-[1px] border-slate-300 grid place-items-center md:h-[45px] md:w-[45px]" >
                             <img src={tableArrowsSort} className="object-center " alt="" />
                         </button>
 
                         {/* button add todo */}
-                        <button onClick={setModal.bind(this,true,'Tambah List Item')} data-cy="todo-add-button" className="relative flex items-center gap-[2px] h-[40px]  justify-center rounded-full w-auto px-3  transition-all duration-300 hover:opacity-[0.6] text-white bg-blue-navbar py-2.5 md:h-[45px]">
+                        <button onClick={setModal.bind(this,true,'Tambah List Item')} data-cy="todo-add-button" className="relative flex items-center gap-[2px] h-[40px]  justify-center rounded-full w-auto px-3  transition-all duration-300 hover:opacity-[0.6] text-white bg-blue-navbar py-2.5 md:h-[45px] md:flex-1">
                             <BiPlus className="text-[0.9em] md:text-[1em] font-bold" />
                             <p className="text-[0.9em] md:text-[1em] font-semibold">Tambah</p>
                         </button>
                         
                         {/* dropdown Sorting */}
-                        <div className="dropdown_container">
-                            <button type="button" className="dropdown_item w-full text-left hover:bg-white px-3 flex  items-center py-3 ">
-                                <img src={iconSortTerbaru} className="object-contain object-center" alt="" />
-
-                                <h2 className="flex-1 text-slate-500 capitalize">terbaru</h2>
-
-                                <img src={iconCheckSort} className="object-contain object-center" alt="" />
-                            </button>
-                            
-                        </div>
+                      {
+                        showDropdown && (
+                            <div className="dropdown_container overflow-hidden">
+                              {
+                                dropdownSorting?.map(element =>{
+                                    return (
+                                        <button onClick={setSorting.bind(this,{id:element.id,type:element.type})} key={element.id} type="button" className="dropdown_item w-full text-left hover:bg-white px-3 flex  items-center py-3 ">
+                                            <img src={element.icon} className="object-contain object-center" alt="" />
+        
+                                            <h2 className="flex-1 text-slate-500 capitalize">{element.title}</h2>
+        
+                                            {
+                                                sortingActive === element.id && <img src={iconCheckSort} className="object-contain object-center" alt="" />
+                                            }
+                                        </button>
+                                    )
+                                })
+                              }
+                                
+                            </div>
+                        )
+                      }
 
                     </div>
                 </header>

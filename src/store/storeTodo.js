@@ -29,6 +29,59 @@ const useTodos = create((set,get) =>({
             return {checkEditTitle:true}
         })
     },
+    // method sorting todo item
+    sortingTodo: (type) =>{
+
+        let dataTodo = get().todolist;
+        // sorting
+        switch (type) {
+            // SORTING DATA TERBARU
+            case 'terbaru':
+                let sortingTerbaru = dataTodo.sort((a,b)=>{
+                            return b.id - a.id
+                        }) 
+                get().setDataTodolist(sortingTerbaru)
+                return  
+            // SORTING DATA TERLAMA YG DIBUAT 
+            case 'terlama':
+                let sortingTerlama = dataTodo.sort((a,b)=>{
+                            return a.id - b.id
+                        }) 
+                        get().setDataTodolist(sortingTerlama)
+                return 
+            // SORTING DATA DARI ABJAD A-Z
+            case 'A-Z':
+                let sortingAZ = dataTodo.sort((a,b)=>{
+                            const titleA = a.title.toLowerCase();
+                            const titleB = b.title.toLowerCase(); 
+                          if (titleA > titleB) {
+                              return 1;
+                          }
+                          return 0
+                      }) 
+                        get().setDataTodolist(sortingAZ)
+                return
+            // SORTING DATA DARI ABJAD Z-A
+            case 'Z-A':
+                let sortingZA = dataTodo.sort((a,b)=>{
+                                  const titleA = a.title.toLowerCase(); 
+                                 const titleB = b.title.toLowerCase(); 
+                                if (titleA < titleB) {
+                                    return 1;
+                                }
+                                return
+                            }) 
+                            get().setDataTodolist(sortingZA)
+                return
+            // SORTING TODO BELUM SELESAI
+            default:
+                    let sortingBelumSelesai = dataTodo.sort((a,b)=>{
+                        return   b.is_active - a.is_active
+                      }) 
+                     get().setDataTodolist(sortingBelumSelesai)
+                break;
+        }
+    },
     // method unutk close mode edit
     setDataEditTitle:()=>{
         set(state=>{

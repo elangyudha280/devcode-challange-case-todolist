@@ -1,8 +1,8 @@
 import IconTerbaru from '../assets/images/icon_sort_terbaru.svg'
 import IconTerlama from '../assets/images/icon_sort_terlama.svg'
-import IconSrotingAZ from '../assets/images/icon_abjad_first.svg'
+import IconSortingAZ from '../assets/images/icon_abjad_first.svg'
 import IconSortingZA from '../assets/images/icon_abjad_last.svg'
-import IconSortingBelumSelesai from '../assets/images/belum_Selesai.svg'
+import IconSortingBelumSelesai from '../assets/images/icon_sort_belum_Selesai.svg'
 
 
 
@@ -23,13 +23,13 @@ const dropdownSorting = [
         id:3,
         title:"A-Z",
         type:'A-Z',
-        icon:IconSrotingAZ
+        icon:IconSortingAZ
     },
     {
         id:4,
         title:"Z-A",
         type:'Z-A',
-        icon:IconSrotingZA
+        icon:IconSortingZA
     },
     {
         id:5,
