@@ -43,18 +43,6 @@ const DetailPage = ()=>{
 
     // get data detail actiivty
     useEffect(()=>{
-        // let raw = {
-        //     title:titleActivity
-        // }
-        // let requestOptions = {
-        // method: 'PATCH',
-        // headers:{
-        //     'Content-Type': 'application/json'
-        // },
-        // body: JSON.stringify(raw),
-        // redirect: 'follow'
-        // };
-
         fetch(`https://todo.api.devcode.gethired.id/activity-groups/${id}`)
         .then(response => {
             if(!response.ok){
@@ -192,11 +180,11 @@ const DetailPage = ()=>{
                         {/* dropdown Sorting */}
                       {
                         showDropdown && (
-                            <div className="dropdown_container overflow-hidden">
+                            <div data-cy="sort-parent" className="dropdown_container overflow-hidden">
                               {
                                 dropdownSorting?.map(element =>{
                                     return (
-                                        <button onClick={setSorting.bind(this,{id:element.id,type:element.type})} key={element.id} type="button" className="dropdown_item w-full text-left hover:bg-white px-3 flex  items-center py-3 ">
+                                        <button data-cy="sort-selection" onClick={setSorting.bind(this,{id:element.id,type:element.type})} key={element.id} type="button" className="dropdown_item w-full text-left hover:bg-white px-3 flex  items-center py-3 ">
                                             <img src={element.icon} className="object-contain object-center" alt="" />
         
                                             <h2 className="flex-1 text-slate-500 capitalize">{element.title}</h2>
