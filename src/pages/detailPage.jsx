@@ -187,7 +187,7 @@ const DetailPage = ()=>{
                                         <button data-cy="sort-selection" onClick={setSorting.bind(this,{id:element.id,type:element.type})} key={element.id} type="button" className="dropdown_item w-full text-left hover:bg-white px-3 flex  items-center py-3 ">
                                             <img src={element.icon} className="object-contain object-center" alt="" />
         
-                                            <h2 className="flex-1 text-slate-500 capitalize">{element.title}</h2>
+                                            <h2 className="flex-1 text-slate-500 capitalize" data-cy="todo-item-title">{element.title}</h2>
         
                                             {
                                                 sortingActive === element.id && <img src={iconCheckSort} className="object-contain object-center" alt="" />

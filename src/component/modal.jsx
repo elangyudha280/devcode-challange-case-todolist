@@ -44,8 +44,8 @@ const  LayoutModalDelete  = ({title,type,eventCloseModal,eventDeleteData})=>{
 const LayoutModalSuccessDelete = ({title})=>{
     return (
         <div data-cy="modal-information" className="card_modal flex flex-col items-center min-[300px]:items-stretch  min-[300px]:flex-row py-3 px-5 gap-2">
-            <FiAlertCircle className="text-green-600 text-[1.5em] inline-block"/>
-            <p className="msg_success font-medium text-center min-[300px]:text-start flex-1 w-full">{title}</p>
+            <FiAlertCircle data-cy="modal-information-icon" className="text-green-600 text-[1.5em] inline-block"/>
+            <p data-cy="modal-information-title" className="msg_success font-medium text-center min-[300px]:text-start flex-1 w-full">{title}</p>
         </div>
     )
 }

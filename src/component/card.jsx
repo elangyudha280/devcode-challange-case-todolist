@@ -40,9 +40,9 @@ const CardActivity = ({activity})=>{
     }
 
     return (
-        <div className="card_activity " >
+        <div className="card_activity" >
             <Link to={`/detail/${activity.id}`} data-cy="activity-item" className="title_card_activity">
-               {activity.title}
+                <p data-cy="activity-item-title">{activity.title}</p>                
             </Link>
             <div className="footer_card_activity">
                 <p data-cy="activity-item-date" className="date text-slate-500 text-[0.9em] flex-1 w-full">
@@ -130,7 +130,7 @@ const CardTodoItem = ({title,priority,id_todo,is_active})=>{
             {/* check todo*/}
             <div className="flex gap-4 items-center">
             {/* input check todo */}
-            <input type="checkbox" defaultChecked={!is_active ? true : false} onClick={checkTodo} className="w-[20px] outline-none  h-[20px]" />
+            <input type="checkbox" data-cy="todo-item-checkbox" defaultChecked={!is_active ? true : false} onClick={checkTodo} className="w-[20px] outline-none  h-[20px]" />
              
             {/* icon priority */}
             <div className={`icon_dropdown w-[12px] h-[12px] rounded-full ${priority}`}></div>
@@ -146,7 +146,7 @@ const CardTodoItem = ({title,priority,id_todo,is_active})=>{
 
             {/* BUTTON DELETE */}
             <div  className="flex-1 w-full flex justify-end items-center">
-                    <button  onClick={openModalDeleteTodo} className="text-slate-400 grid place-items-center text-[1.4em]">
+                    <button data-cy="todo-item-delete-button" onClick={openModalDeleteTodo} className="text-slate-400 grid place-items-center text-[1.4em]">
                         <TbTrash/>
                     </button>
             </div>
