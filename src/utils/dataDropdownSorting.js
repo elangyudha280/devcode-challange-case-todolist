@@ -9,13 +9,13 @@ import IconSortingBelumSelesai from '../assets/images/icon_sort_belum_Selesai.sv
 const dropdownSorting = [
     {
         id:1,
-        title:"terbaru",
+        title:"Terbaru",
         type:'terbaru',
         icon:IconTerbaru
     },
     {
         id:2,
-        title:"terlama",
+        title:"Terlama",
         type:'terlama',
         icon:IconTerlama
     },
@@ -33,7 +33,7 @@ const dropdownSorting = [
     },
     {
         id:5,
-        title:"belum selesai",
+        title:"Belum Selesai",
         type:'belum selesai',
         icon:IconSortingBelumSelesai
     },
